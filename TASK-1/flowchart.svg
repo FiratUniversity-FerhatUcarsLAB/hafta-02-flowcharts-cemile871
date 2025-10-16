@@ -1,0 +1,267 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1051pt" height="1021pt" viewBox="0.00 0.00 1051.00 1021.00">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 1016.83)">
+<title>ATM_Para_Cekme</title>
+<polygon fill="white" stroke="none" points="-4,4 -4,-1016.83 1047.43,-1016.83 1047.43,4 -4,4"/>
+<!-- start -->
+<g id="node1" class="node">
+<title>start</title>
+<ellipse fill="none" stroke="black" cx="859.51" cy="-994.83" rx="41.1" ry="18"/>
+<text xml:space="preserve" text-anchor="middle" x="859.51" y="-990.63" font-family="Arial" font-size="14.00">BAŞLA</text>
+</g>
+<!-- input_pin -->
+<g id="node3" class="node">
+<title>input_pin</title>
+<polygon fill="none" stroke="black" points="983.5,-939.83 786.26,-939.83 735.52,-903.83 932.76,-903.83 983.5,-939.83"/>
+<text xml:space="preserve" text-anchor="middle" x="859.51" y="-917.63" font-family="Arial" font-size="14.00">Lütfen PIN giriniz</text>
+</g>
+<!-- start&#45;&gt;input_pin -->
+<g id="edge1" class="edge">
+<title>start-&gt;input_pin</title>
+<path fill="none" stroke="black" d="M859.51,-976.64C859.51,-969.06 859.51,-959.93 859.51,-951.37"/>
+<polygon fill="black" stroke="black" points="863.01,-951.37 859.51,-941.37 856.01,-951.37 863.01,-951.37"/>
+</g>
+<!-- end -->
+<g id="node2" class="node">
+<title>end</title>
+<ellipse fill="none" stroke="black" cx="852.51" cy="-29.42" rx="145.56" ry="29.42"/>
+<text xml:space="preserve" text-anchor="middle" x="852.51" y="-33.62" font-family="Arial" font-size="14.00">SON</text>
+<text xml:space="preserve" text-anchor="middle" x="852.51" y="-16.82" font-family="Arial" font-size="14.00">Kartınızı almayı unutmayın.</text>
+</g>
+<!-- check_pin -->
+<g id="node4" class="node">
+<title>check_pin</title>
+<polygon fill="none" stroke="black" points="792.51,-866.83 685.05,-848.83 792.51,-830.83 899.96,-848.83 792.51,-866.83"/>
+<text xml:space="preserve" text-anchor="middle" x="792.51" y="-844.63" font-family="Arial" font-size="14.00">PIN doğru mu?</text>
+</g>
+<!-- input_pin&#45;&gt;check_pin -->
+<g id="edge2" class="edge">
+<title>input_pin-&gt;check_pin</title>
+<path fill="none" stroke="black" d="M843.29,-903.64C834.66,-894.5 823.93,-883.13 814.56,-873.2"/>
+<polygon fill="black" stroke="black" points="817.2,-870.9 807.8,-866.03 812.11,-875.71 817.2,-870.9"/>
+</g>
+<!-- wrong_pin -->
+<g id="node5" class="node">
+<title>wrong_pin</title>
+<polygon fill="none" stroke="black" points="880.58,-778.03 784.44,-778.03 784.44,-742.03 880.58,-742.03 880.58,-778.03"/>
+<text xml:space="preserve" text-anchor="middle" x="832.51" y="-755.83" font-family="Arial" font-size="14.00">PIN_HAK - 1</text>
+</g>
+<!-- check_pin&#45;&gt;wrong_pin -->
+<g id="edge4" class="edge">
+<title>check_pin-&gt;wrong_pin</title>
+<path fill="none" stroke="black" d="M799.84,-831.91C805.42,-819.82 813.21,-802.9 819.79,-788.62"/>
+<polygon fill="black" stroke="black" points="822.89,-790.26 823.9,-779.71 816.53,-787.33 822.89,-790.26"/>
+<text xml:space="preserve" text-anchor="middle" x="833.58" y="-800.23" font-family="Times,serif" font-size="14.00">Hayır</text>
+</g>
+<!-- input_amount -->
+<g id="node8" class="node">
+<title>input_amount</title>
+<polygon fill="none" stroke="black" points="727.66,-778.03 490.39,-778.03 429.35,-742.03 666.63,-742.03 727.66,-778.03"/>
+<text xml:space="preserve" text-anchor="middle" x="578.51" y="-755.83" font-family="Arial" font-size="14.00">Tutar gir (20 TL katı)</text>
+</g>
+<!-- check_pin&#45;&gt;input_amount -->
+<g id="edge3" class="edge">
+<title>check_pin-&gt;input_amount</title>
+<path fill="none" stroke="black" d="M762.3,-835.58C728.56,-821.89 673.29,-799.48 632.16,-782.79"/>
+<polygon fill="black" stroke="black" points="633.48,-779.55 622.9,-779.04 630.85,-786.04 633.48,-779.55"/>
+<text xml:space="preserve" text-anchor="middle" x="717.5" y="-800.23" font-family="Times,serif" font-size="14.00">Evet</text>
+</g>
+<!-- pin_attempts -->
+<g id="node6" class="node">
+<title>pin_attempts</title>
+<polygon fill="none" stroke="black" points="927.51,-705.03 822.7,-687.03 927.51,-669.03 1032.31,-687.03 927.51,-705.03"/>
+<text xml:space="preserve" text-anchor="middle" x="927.51" y="-682.83" font-family="Arial" font-size="14.00">PIN_HAK &gt; 0?</text>
+</g>
+<!-- wrong_pin&#45;&gt;pin_attempts -->
+<g id="edge5" class="edge">
+<title>wrong_pin-&gt;pin_attempts</title>
+<path fill="none" stroke="black" d="M855.5,-741.84C868.71,-731.97 885.4,-719.5 899.38,-709.05"/>
+<polygon fill="black" stroke="black" points="901.43,-711.89 907.34,-703.1 897.24,-706.29 901.43,-711.89"/>
+</g>
+<!-- pin_attempts&#45;&gt;input_pin -->
+<g id="edge6" class="edge">
+<title>pin_attempts-&gt;input_pin</title>
+<path fill="none" stroke="black" d="M929.1,-705.2C931.43,-738.15 933.15,-811.85 908.51,-866.83 903.82,-877.29 896.32,-887.11 888.58,-895.43"/>
+<polygon fill="black" stroke="black" points="886.17,-892.88 881.6,-902.44 891.13,-897.82 886.17,-892.88"/>
+<text xml:space="preserve" text-anchor="middle" x="939.85" y="-800.23" font-family="Times,serif" font-size="14.00">Evet</text>
+</g>
+<!-- pin_blocked -->
+<g id="node7" class="node">
+<title>pin_blocked</title>
+<polygon fill="none" stroke="black" points="1043.43,-562.23 857.43,-562.23 809.58,-526.23 995.58,-526.23 1043.43,-562.23"/>
+<text xml:space="preserve" text-anchor="middle" x="926.51" y="-540.03" font-family="Arial" font-size="14.00">Kart bloke edildi</text>
+</g>
+<!-- pin_attempts&#45;&gt;pin_blocked -->
+<g id="edge7" class="edge">
+<title>pin_attempts-&gt;pin_blocked</title>
+<path fill="none" stroke="black" d="M927.38,-668.77C927.22,-645.12 926.91,-602.36 926.71,-573.87"/>
+<polygon fill="black" stroke="black" points="930.21,-574.13 926.64,-564.15 923.21,-574.18 930.21,-574.13"/>
+<text xml:space="preserve" text-anchor="middle" x="944.75" y="-638.43" font-family="Times,serif" font-size="14.00">Hayır</text>
+</g>
+<!-- pin_blocked&#45;&gt;end -->
+<g id="edge8" class="edge">
+<title>pin_blocked-&gt;end</title>
+<path fill="none" stroke="black" d="M924.19,-525.85C921.83,-506.58 918.51,-474.54 918.51,-446.83 918.51,-446.83 918.51,-446.83 918.51,-128.63 918.51,-105.71 905.97,-84.12 891.83,-67.05"/>
+<polygon fill="black" stroke="black" points="894.58,-64.88 885.35,-59.68 889.33,-69.5 894.58,-64.88"/>
+</g>
+<!-- check_multiple -->
+<g id="node9" class="node">
+<title>check_multiple</title>
+<polygon fill="none" stroke="black" points="531.51,-705.03 384.25,-687.03 531.51,-669.03 678.76,-687.03 531.51,-705.03"/>
+<text xml:space="preserve" text-anchor="middle" x="531.51" y="-682.83" font-family="Arial" font-size="14.00">Tutar 20'nin katı mı?</text>
+</g>
+<!-- input_amount&#45;&gt;check_multiple -->
+<g id="edge9" class="edge">
+<title>input_amount-&gt;check_multiple</title>
+<path fill="none" stroke="black" d="M567.13,-741.84C561.48,-733.32 554.55,-722.84 548.31,-713.41"/>
+<polygon fill="black" stroke="black" points="551.41,-711.76 542.97,-705.35 545.57,-715.62 551.41,-711.76"/>
+</g>
+<!-- not_multiple -->
+<g id="node10" class="node">
+<title>not_multiple</title>
+<polygon fill="none" stroke="black" points="437,-616.23 172.15,-616.23 104.02,-580.23 368.86,-580.23 437,-616.23"/>
+<text xml:space="preserve" text-anchor="middle" x="270.51" y="-594.03" font-family="Arial" font-size="14.00">Hata: 20 TL katı olmalı</text>
+</g>
+<!-- check_multiple&#45;&gt;not_multiple -->
+<g id="edge11" class="edge">
+<title>check_multiple-&gt;not_multiple</title>
+<path fill="none" stroke="black" d="M493.28,-673.32C451.33,-659.37 383.34,-636.75 333.49,-620.18"/>
+<polygon fill="black" stroke="black" points="334.86,-616.94 324.26,-617.11 332.65,-623.59 334.86,-616.94"/>
+<text xml:space="preserve" text-anchor="middle" x="441.88" y="-638.43" font-family="Times,serif" font-size="14.00">Hayır</text>
+</g>
+<!-- check_balance -->
+<g id="node11" class="node">
+<title>check_balance</title>
+<polygon fill="none" stroke="black" points="566.51,-616.23 454.87,-598.23 566.51,-580.23 678.14,-598.23 566.51,-616.23"/>
+<text xml:space="preserve" text-anchor="middle" x="566.51" y="-594.03" font-family="Arial" font-size="14.00">Tutar &gt; Bakiye?</text>
+</g>
+<!-- check_multiple&#45;&gt;check_balance -->
+<g id="edge10" class="edge">
+<title>check_multiple-&gt;check_balance</title>
+<path fill="none" stroke="black" d="M538.09,-669.7C543.08,-657.34 550.03,-640.09 555.81,-625.75"/>
+<polygon fill="black" stroke="black" points="558.89,-627.47 559.39,-616.89 552.4,-624.85 558.89,-627.47"/>
+<text xml:space="preserve" text-anchor="middle" x="564.97" y="-638.43" font-family="Times,serif" font-size="14.00">Evet</text>
+</g>
+<!-- not_multiple&#45;&gt;input_amount -->
+<g id="edge12" class="edge">
+<title>not_multiple-&gt;input_amount</title>
+<path fill="none" stroke="black" d="M283.01,-616.68C300.84,-640.3 335.86,-682.09 375.51,-705.03 401.19,-719.89 431.05,-730.76 459.84,-738.67"/>
+<polygon fill="black" stroke="black" points="458.78,-742.02 469.34,-741.18 460.57,-735.25 458.78,-742.02"/>
+</g>
+<!-- insufficient_balance -->
+<g id="node12" class="node">
+<title>insufficient_balance</title>
+<polygon fill="none" stroke="black" points="766.7,-508.23 588.23,-508.23 542.32,-472.23 720.79,-472.23 766.7,-508.23"/>
+<text xml:space="preserve" text-anchor="middle" x="654.51" y="-486.03" font-family="Arial" font-size="14.00">Yetersiz bakiye</text>
+</g>
+<!-- check_balance&#45;&gt;insufficient_balance -->
+<g id="edge14" class="edge">
+<title>check_balance-&gt;insufficient_balance</title>
+<path fill="none" stroke="black" d="M579.12,-582.04C593.13,-565.17 616,-537.61 632.89,-517.27"/>
+<polygon fill="black" stroke="black" points="635.51,-519.6 639.2,-509.67 630.12,-515.12 635.51,-519.6"/>
+<text xml:space="preserve" text-anchor="middle" x="636.36" y="-540.03" font-family="Times,serif" font-size="14.00">Evet</text>
+</g>
+<!-- check_limit -->
+<g id="node13" class="node">
+<title>check_limit</title>
+<polygon fill="none" stroke="black" points="289.51,-508.23 54.54,-490.23 289.51,-472.23 524.47,-490.23 289.51,-508.23"/>
+<text xml:space="preserve" text-anchor="middle" x="289.51" y="-486.03" font-family="Arial" font-size="14.00">(Kullanılan + Tutar) &gt; Günlük Limit?</text>
+</g>
+<!-- check_balance&#45;&gt;check_limit -->
+<g id="edge13" class="edge">
+<title>check_balance-&gt;check_limit</title>
+<path fill="none" stroke="black" d="M534.46,-584.97C486.16,-566.49 394.37,-531.36 337.9,-509.75"/>
+<polygon fill="black" stroke="black" points="339.45,-506.59 328.86,-506.29 336.94,-513.13 339.45,-506.59"/>
+<text xml:space="preserve" text-anchor="middle" x="486.5" y="-540.03" font-family="Times,serif" font-size="14.00">Hayır</text>
+</g>
+<!-- insufficient_balance&#45;&gt;input_amount -->
+<g id="edge15" class="edge">
+<title>insufficient_balance-&gt;input_amount</title>
+<path fill="none" stroke="black" d="M664.39,-508.57C684.91,-547.09 727.02,-641.37 687.51,-705.03 679.05,-718.66 666.01,-728.96 651.86,-736.7"/>
+<polygon fill="black" stroke="black" points="650.66,-733.39 643.28,-740.98 653.79,-739.65 650.66,-733.39"/>
+</g>
+<!-- limit_exceeded -->
+<g id="node14" class="node">
+<title>limit_exceeded</title>
+<polygon fill="none" stroke="black" points="185.01,-416.63 37.86,-416.63 0,-380.63 147.16,-380.63 185.01,-416.63"/>
+<text xml:space="preserve" text-anchor="middle" x="92.51" y="-394.43" font-family="Arial" font-size="14.00">Limit aşıldı</text>
+</g>
+<!-- check_limit&#45;&gt;limit_exceeded -->
+<g id="edge17" class="edge">
+<title>check_limit-&gt;limit_exceeded</title>
+<path fill="none" stroke="black" d="M256.98,-474.44C225.45,-460.09 177.22,-438.16 141.14,-421.75"/>
+<polygon fill="black" stroke="black" points="142.76,-418.64 132.21,-417.69 139.86,-425.01 142.76,-418.64"/>
+<text xml:space="preserve" text-anchor="middle" x="221.48" y="-441.63" font-family="Times,serif" font-size="14.00">Evet</text>
+</g>
+<!-- update_balance -->
+<g id="node15" class="node">
+<title>update_balance</title>
+<polygon fill="none" stroke="black" points="556.6,-419.43 418.41,-419.43 418.41,-377.83 556.6,-377.83 556.6,-419.43"/>
+<text xml:space="preserve" text-anchor="middle" x="487.51" y="-402.83" font-family="Arial" font-size="14.00">Bakiye -= Tutar</text>
+<text xml:space="preserve" text-anchor="middle" x="487.51" y="-386.03" font-family="Arial" font-size="14.00">Kullanılan += Tutar</text>
+</g>
+<!-- check_limit&#45;&gt;update_balance -->
+<g id="edge16" class="edge">
+<title>check_limit-&gt;update_balance</title>
+<path fill="none" stroke="black" d="M322.2,-474.44C352.19,-460.86 397.21,-440.49 432.7,-424.43"/>
+<polygon fill="black" stroke="black" points="433.86,-427.75 441.52,-420.44 430.97,-421.37 433.86,-427.75"/>
+<text xml:space="preserve" text-anchor="middle" x="417.85" y="-441.63" font-family="Times,serif" font-size="14.00">Hayır</text>
+</g>
+<!-- limit_exceeded&#45;&gt;input_amount -->
+<g id="edge18" class="edge">
+<title>limit_exceeded-&gt;input_amount</title>
+<path fill="none" stroke="black" d="M69.05,-417.12C50.08,-433.44 26.51,-459.67 26.51,-489.23 26.51,-688.03 26.51,-688.03 26.51,-688.03 26.51,-729.59 275.82,-747.36 439.35,-754.54"/>
+<polygon fill="black" stroke="black" points="438.83,-758.02 448.97,-754.95 439.13,-751.03 438.83,-758.02"/>
+</g>
+<!-- show_success -->
+<g id="node16" class="node">
+<title>show_success</title>
+<polygon fill="none" stroke="black" points="650.5,-340.83 434.17,-340.83 378.51,-257.63 594.85,-257.63 650.5,-340.83"/>
+<text xml:space="preserve" text-anchor="middle" x="514.51" y="-303.43" font-family="Arial" font-size="14.00">İşlem başarılı</text>
+<text xml:space="preserve" text-anchor="middle" x="514.51" y="-286.63" font-family="Arial" font-size="14.00">Yeni bakiye göster</text>
+</g>
+<!-- update_balance&#45;&gt;show_success -->
+<g id="edge19" class="edge">
+<title>update_balance-&gt;show_success</title>
+<path fill="none" stroke="black" d="M493.1,-377.45C495.17,-370 497.61,-361.18 500.1,-352.21"/>
+<polygon fill="black" stroke="black" points="503.43,-353.31 502.72,-342.74 496.68,-351.44 503.43,-353.31"/>
+</g>
+<!-- ask_repeat -->
+<g id="node17" class="node">
+<title>ask_repeat</title>
+<polygon fill="none" stroke="black" points="761.43,-220.63 540.43,-220.63 483.58,-184.63 704.58,-184.63 761.43,-220.63"/>
+<text xml:space="preserve" text-anchor="middle" x="622.51" y="-198.43" font-family="Arial" font-size="14.00">Başka işlem? (E/H)</text>
+</g>
+<!-- show_success&#45;&gt;ask_repeat -->
+<g id="edge20" class="edge">
+<title>show_success-&gt;ask_repeat</title>
+<path fill="none" stroke="black" d="M561.25,-257.29C572.45,-247.48 584.07,-237.3 594.15,-228.47"/>
+<polygon fill="black" stroke="black" points="596.19,-231.33 601.41,-222.11 591.58,-226.07 596.19,-231.33"/>
+</g>
+<!-- repeat_check -->
+<g id="node18" class="node">
+<title>repeat_check</title>
+<polygon fill="none" stroke="black" points="794.51,-147.63 706.4,-129.63 794.51,-111.63 882.61,-129.63 794.51,-147.63"/>
+<text xml:space="preserve" text-anchor="middle" x="794.51" y="-125.43" font-family="Arial" font-size="14.00">Cevap = H?</text>
+</g>
+<!-- ask_repeat&#45;&gt;repeat_check -->
+<g id="edge21" class="edge">
+<title>ask_repeat-&gt;repeat_check</title>
+<path fill="none" stroke="black" d="M664.58,-184.26C692.5,-172.74 728.87,-157.73 756.02,-146.52"/>
+<polygon fill="black" stroke="black" points="757,-149.9 764.91,-142.85 754.33,-143.43 757,-149.9"/>
+</g>
+<!-- repeat_check&#45;&gt;end -->
+<g id="edge23" class="edge">
+<title>repeat_check-&gt;end</title>
+<path fill="none" stroke="black" d="M803.57,-113.29C810.57,-101.42 820.59,-84.47 829.73,-68.98"/>
+<polygon fill="black" stroke="black" points="832.73,-70.78 834.81,-60.39 826.71,-67.22 832.73,-70.78"/>
+<text xml:space="preserve" text-anchor="middle" x="836.33" y="-81.03" font-family="Times,serif" font-size="14.00">Evet</text>
+</g>
+<!-- repeat_check&#45;&gt;input_amount -->
+<g id="edge22" class="edge">
+<title>repeat_check-&gt;input_amount</title>
+<path fill="none" stroke="black" d="M794.51,-148.14C794.51,-162.51 794.51,-183.39 794.51,-201.63 794.51,-688.03 794.51,-688.03 794.51,-688.03 794.51,-713.65 738.97,-731.54 684.22,-742.96"/>
+<polygon fill="black" stroke="black" points="683.53,-739.53 674.42,-744.93 684.91,-746.39 683.53,-739.53"/>
+<text xml:space="preserve" text-anchor="middle" x="812" y="-441.63" font-family="Times,serif" font-size="14.00">Hayır</text>
+</g>
+</g>
+</svg>
