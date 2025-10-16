@@ -1,0 +1,85 @@
+digraph E_TICARET_SISTEMI {
+    // Yön yukarıdan aşağıya
+    rankdir=TB;
+    fontname="Arial";
+    node [shape=rectangle, style=rounded, fontname="Arial"];
+    edge [fontname="Arial"];
+
+    START [label="SİSTEM BAŞLA", shape=oval, style=filled, fillcolor=lightgreen];
+    END [label="SİSTEM BİTİR", shape=oval, style=filled, fillcolor=lightblue];
+
+    LOGIN [label="Kullanıcı Girişi"];
+    NEW_ACC [label="Yeni Kayıt mı?", shape=diamond];
+    REGISTER [label="Kayıt Ol()"];
+    VALIDATE [label="Kullanıcı Doğrulama()"];
+    LOGIN_FAIL [label="Geçersiz Kullanıcı Bilgisi", shape=rectangle, fillcolor=mistyrose, style="filled,rounded"];
+    SESSION [label="Oturum Aç()"];
+
+    CART [label="Sepet İşlemleri"];
+    LOOP_ADD [label="Ürün Eklemek İstiyor mu?", shape=diamond];
+    STOCK_CHECK_ADD [label="Stok >= Adet ?", shape=diamond];
+    ADD_OK [label="Sepete Ekle()"];
+    ADD_FAIL [label="Yetersiz Stok!"];
+    CART_SHOW [label="Sepeti Göster()"];
+
+    STOCK_CTRL [label="Stok Kontrolü (Ödeme Öncesi)"];
+    LOOP_STOCK [label="Her Ürün için", shape=diamond];
+    STOCK_OK [label="Stok >= Adet ?", shape=diamond];
+    STOCK_FAIL [label="Bazı Ürünler Stokta Yok\nSipariş Engellendi", fillcolor=mistyrose, style="filled,rounded"];
+
+    DISCOUNT [label="İndirim Kodu Girildi mi?", shape=diamond];
+    DISCOUNT_VALID [label="Kod Geçerli mi?", shape=diamond];
+    APPLY_DISCOUNT [label="İndirim Uygula()"];
+    INVALID_DISCOUNT [label="Geçersiz Kod"];
+
+    SHIPPING [label="Kargo Hesaplama"];
+    SELECT_SHIP [label="Kargo Seç()"];
+    TOTAL [label="Toplam = Sepet + Kargo"];
+
+    PAYMENT [label="Ödeme Aşaması"];
+    PAY_METHOD [label="Ödeme Yöntemi Seç()"];
+    PAY_RESULT [label="Ödeme Başarılı mı?", shape=diamond];
+    PAY_OK [label="Sipariş Oluştur + Stok Güncelle + Fatura Oluştur"];
+    PAY_FAIL [label="Ödeme Başarısız", fillcolor=mistyrose, style="filled,rounded"];
+
+    POST_ORDER [label="Kargo Gönder + Durum Güncelle"];
+
+    START -> LOGIN;
+    LOGIN -> NEW_ACC;
+    NEW_ACC -> REGISTER [label="EVET"];
+    NEW_ACC -> VALIDATE [label="HAYIR"];
+    REGISTER -> SESSION;
+    VALIDATE -> LOGIN_FAIL [label="HAYIR"];
+    VALIDATE -> SESSION [label="EVET"];
+    LOGIN_FAIL -> END;
+    SESSION -> CART;
+
+    CART -> LOOP_ADD;
+    LOOP_ADD -> STOCK_CHECK_ADD [label="EVET"];
+    LOOP_ADD -> CART_SHOW [label="HAYIR"];
+    STOCK_CHECK_ADD -> ADD_OK [label="EVET"];
+    STOCK_CHECK_ADD -> ADD_FAIL [label="HAYIR"];
+    ADD_OK -> LOOP_ADD;
+    ADD_FAIL -> LOOP_ADD;
+    CART_SHOW -> STOCK_CTRL;
+
+    STOCK_CTRL -> LOOP_STOCK;
+    LOOP_STOCK -> STOCK_OK;
+    STOCK_OK -> STOCK_FAIL [label="HAYIR"];
+    STOCK_OK -> DISCOUNT [label="EVET"];
+    STOCK_FAIL -> END;
+
+    DISCOUNT -> DISCOUNT_VALID [label="EVET"];
+    DISCOUNT -> SHIPPING [label="HAYIR"];
+    DISCOUNT_VALID -> APPLY_DISCOUNT [label="EVET"];
+    DISCOUNT_VALID -> INVALID_DISCOUNT [label="HAYIR"];
+    APPLY_DISCOUNT -> SHIPPING;
+    INVALID_DISCOUNT -> SHIPPING;
+
+    SHIPPING -> SELECT_SHIP -> TOTAL -> PAYMENT;
+    PAYMENT -> PAY_METHOD -> PAY_RESULT;
+    PAY_RESULT -> PAY_OK [label="EVET"];
+    PAY_RESULT -> PAY_FAIL [label="HAYIR"];
+    PAY_OK -> POST_ORDER -> END;
+    PAY_FAIL -> END;
+}
