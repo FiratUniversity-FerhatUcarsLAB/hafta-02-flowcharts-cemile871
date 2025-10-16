@@ -1,0 +1,437 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="622pt" height="1871pt" viewBox="0.00 0.00 622.00 1871.00">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 1867.2)">
+<title>E_TICARET_SISTEMI</title>
+<polygon fill="white" stroke="none" points="-4,4 -4,-1867.2 618.48,-1867.2 618.48,4 -4,4"/>
+<!-- START -->
+<g id="node1" class="node">
+<title>START</title>
+<ellipse fill="lightgreen" stroke="black" cx="453.57" cy="-1845.2" rx="82.41" ry="18"/>
+<text xml:space="preserve" text-anchor="middle" x="453.57" y="-1841" font-family="Arial" font-size="14.00">SİSTEM BAŞLA</text>
+</g>
+<!-- LOGIN -->
+<g id="node3" class="node">
+<title>LOGIN</title>
+<path fill="none" stroke="black" d="M498.58,-1790.2C498.58,-1790.2 408.55,-1790.2 408.55,-1790.2 402.55,-1790.2 396.55,-1784.2 396.55,-1778.2 396.55,-1778.2 396.55,-1766.2 396.55,-1766.2 396.55,-1760.2 402.55,-1754.2 408.55,-1754.2 408.55,-1754.2 498.58,-1754.2 498.58,-1754.2 504.58,-1754.2 510.58,-1760.2 510.58,-1766.2 510.58,-1766.2 510.58,-1778.2 510.58,-1778.2 510.58,-1784.2 504.58,-1790.2 498.58,-1790.2"/>
+<text xml:space="preserve" text-anchor="middle" x="453.57" y="-1768" font-family="Arial" font-size="14.00">Kullanıcı Girişi</text>
+</g>
+<!-- START&#45;&gt;LOGIN -->
+<g id="edge1" class="edge">
+<title>START-&gt;LOGIN</title>
+<path fill="none" stroke="black" d="M453.57,-1827.01C453.57,-1819.43 453.57,-1810.3 453.57,-1801.74"/>
+<polygon fill="black" stroke="black" points="457.07,-1801.74 453.57,-1791.74 450.07,-1801.74 457.07,-1801.74"/>
+</g>
+<!-- END -->
+<g id="node2" class="node">
+<title>END</title>
+<ellipse fill="lightblue" stroke="black" cx="423.57" cy="-18" rx="82.4" ry="18"/>
+<text xml:space="preserve" text-anchor="middle" x="423.57" y="-13.8" font-family="Arial" font-size="14.00">SİSTEM BİTİR</text>
+</g>
+<!-- NEW_ACC -->
+<g id="node4" class="node">
+<title>NEW_ACC</title>
+<path fill="none" stroke="black" d="M441.72,-1715.3C441.72,-1715.3 353.41,-1701.1 353.41,-1701.1 347.48,-1700.15 347.48,-1698.25 353.41,-1697.3 353.41,-1697.3 441.72,-1683.1 441.72,-1683.1 447.64,-1682.15 459.49,-1682.15 465.41,-1683.1 465.41,-1683.1 553.73,-1697.3 553.73,-1697.3 559.65,-1698.25 559.65,-1700.15 553.73,-1701.1 553.73,-1701.1 465.41,-1715.3 465.41,-1715.3 459.49,-1716.25 447.64,-1716.25 441.72,-1715.3"/>
+<text xml:space="preserve" text-anchor="middle" x="453.57" y="-1695" font-family="Arial" font-size="14.00">Yeni Kayıt mı?</text>
+</g>
+<!-- LOGIN&#45;&gt;NEW_ACC -->
+<g id="edge2" class="edge">
+<title>LOGIN-&gt;NEW_ACC</title>
+<path fill="none" stroke="black" d="M453.57,-1754.01C453.57,-1746.43 453.57,-1737.3 453.57,-1728.74"/>
+<polygon fill="black" stroke="black" points="457.07,-1728.74 453.57,-1718.74 450.07,-1728.74 457.07,-1728.74"/>
+</g>
+<!-- REGISTER -->
+<g id="node5" class="node">
+<title>REGISTER</title>
+<path fill="none" stroke="black" d="M413.07,-1628.4C413.07,-1628.4 358.06,-1628.4 358.06,-1628.4 352.06,-1628.4 346.06,-1622.4 346.06,-1616.4 346.06,-1616.4 346.06,-1604.4 346.06,-1604.4 346.06,-1598.4 352.06,-1592.4 358.06,-1592.4 358.06,-1592.4 413.07,-1592.4 413.07,-1592.4 419.07,-1592.4 425.07,-1598.4 425.07,-1604.4 425.07,-1604.4 425.07,-1616.4 425.07,-1616.4 425.07,-1622.4 419.07,-1628.4 413.07,-1628.4"/>
+<text xml:space="preserve" text-anchor="middle" x="385.57" y="-1606.2" font-family="Arial" font-size="14.00">Kayıt Ol()</text>
+</g>
+<!-- NEW_ACC&#45;&gt;REGISTER -->
+<g id="edge3" class="edge">
+<title>NEW_ACC-&gt;REGISTER</title>
+<path fill="none" stroke="black" d="M441.41,-1682.68C431.6,-1670.16 417.59,-1652.28 406.06,-1637.55"/>
+<polygon fill="black" stroke="black" points="409.11,-1635.78 400.19,-1630.06 403.6,-1640.09 409.11,-1635.78"/>
+<text xml:space="preserve" text-anchor="middle" x="443.94" y="-1650.6" font-family="Arial" font-size="14.00">EVET</text>
+</g>
+<!-- VALIDATE -->
+<g id="node6" class="node">
+<title>VALIDATE</title>
+<path fill="none" stroke="black" d="M590.15,-1628.4C590.15,-1628.4 454.99,-1628.4 454.99,-1628.4 448.99,-1628.4 442.99,-1622.4 442.99,-1616.4 442.99,-1616.4 442.99,-1604.4 442.99,-1604.4 442.99,-1598.4 448.99,-1592.4 454.99,-1592.4 454.99,-1592.4 590.15,-1592.4 590.15,-1592.4 596.15,-1592.4 602.15,-1598.4 602.15,-1604.4 602.15,-1604.4 602.15,-1616.4 602.15,-1616.4 602.15,-1622.4 596.15,-1628.4 590.15,-1628.4"/>
+<text xml:space="preserve" text-anchor="middle" x="522.57" y="-1606.2" font-family="Arial" font-size="14.00">Kullanıcı Doğrulama()</text>
+</g>
+<!-- NEW_ACC&#45;&gt;VALIDATE -->
+<g id="edge4" class="edge">
+<title>NEW_ACC-&gt;VALIDATE</title>
+<path fill="none" stroke="black" d="M465.9,-1682.68C475.85,-1670.16 490.07,-1652.28 501.78,-1637.55"/>
+<polygon fill="black" stroke="black" points="504.25,-1640.06 507.74,-1630.06 498.77,-1635.71 504.25,-1640.06"/>
+<text xml:space="preserve" text-anchor="middle" x="515.64" y="-1650.6" font-family="Arial" font-size="14.00">HAYIR</text>
+</g>
+<!-- SESSION -->
+<g id="node8" class="node">
+<title>SESSION</title>
+<path fill="none" stroke="black" d="M420.07,-1539.6C420.07,-1539.6 351.06,-1539.6 351.06,-1539.6 345.06,-1539.6 339.06,-1533.6 339.06,-1527.6 339.06,-1527.6 339.06,-1515.6 339.06,-1515.6 339.06,-1509.6 345.06,-1503.6 351.06,-1503.6 351.06,-1503.6 420.07,-1503.6 420.07,-1503.6 426.07,-1503.6 432.07,-1509.6 432.07,-1515.6 432.07,-1515.6 432.07,-1527.6 432.07,-1527.6 432.07,-1533.6 426.07,-1539.6 420.07,-1539.6"/>
+<text xml:space="preserve" text-anchor="middle" x="385.57" y="-1517.4" font-family="Arial" font-size="14.00">Oturum Aç()</text>
+</g>
+<!-- REGISTER&#45;&gt;SESSION -->
+<g id="edge5" class="edge">
+<title>REGISTER-&gt;SESSION</title>
+<path fill="none" stroke="black" d="M385.57,-1592.25C385.57,-1580.56 385.57,-1564.79 385.57,-1551.22"/>
+<polygon fill="black" stroke="black" points="389.07,-1551.52 385.57,-1541.52 382.07,-1551.52 389.07,-1551.52"/>
+</g>
+<!-- LOGIN_FAIL -->
+<g id="node7" class="node">
+<title>LOGIN_FAIL</title>
+<path fill="mistyrose" stroke="black" d="M602.48,-1485.6C602.48,-1485.6 448.65,-1485.6 448.65,-1485.6 442.65,-1485.6 436.65,-1479.6 436.65,-1473.6 436.65,-1473.6 436.65,-1461.6 436.65,-1461.6 436.65,-1455.6 442.65,-1449.6 448.65,-1449.6 448.65,-1449.6 602.48,-1449.6 602.48,-1449.6 608.48,-1449.6 614.48,-1455.6 614.48,-1461.6 614.48,-1461.6 614.48,-1473.6 614.48,-1473.6 614.48,-1479.6 608.48,-1485.6 602.48,-1485.6"/>
+<text xml:space="preserve" text-anchor="middle" x="525.57" y="-1463.4" font-family="Arial" font-size="14.00">Geçersiz Kullanıcı Bilgisi</text>
+</g>
+<!-- VALIDATE&#45;&gt;LOGIN_FAIL -->
+<g id="edge6" class="edge">
+<title>VALIDATE-&gt;LOGIN_FAIL</title>
+<path fill="none" stroke="black" d="M522.93,-1592.14C523.44,-1568.49 524.35,-1525.72 524.96,-1497.24"/>
+<polygon fill="black" stroke="black" points="528.45,-1497.59 525.16,-1487.52 521.45,-1497.44 528.45,-1497.59"/>
+<text xml:space="preserve" text-anchor="middle" x="545.02" y="-1561.8" font-family="Arial" font-size="14.00">HAYIR</text>
+</g>
+<!-- VALIDATE&#45;&gt;SESSION -->
+<g id="edge7" class="edge">
+<title>VALIDATE-&gt;SESSION</title>
+<path fill="none" stroke="black" d="M493.47,-1591.95C484.32,-1586.4 474.21,-1580.2 465,-1574.4 450.65,-1565.36 434.99,-1555.21 421.4,-1546.31"/>
+<polygon fill="black" stroke="black" points="423.46,-1543.47 413.18,-1540.91 419.61,-1549.32 423.46,-1543.47"/>
+<text xml:space="preserve" text-anchor="middle" x="483.28" y="-1561.8" font-family="Arial" font-size="14.00">EVET</text>
+</g>
+<!-- LOGIN_FAIL&#45;&gt;END -->
+<g id="edge8" class="edge">
+<title>LOGIN_FAIL-&gt;END</title>
+<path fill="none" stroke="black" d="M525.88,-1449.21C526.17,-1431.27 526.57,-1402.48 526.57,-1377.6 526.57,-1377.6 526.57,-1377.6 526.57,-90 526.57,-65.23 506.13,-48.44 483.46,-37.44"/>
+<polygon fill="black" stroke="black" points="484.9,-34.25 474.34,-33.39 482.06,-40.65 484.9,-34.25"/>
+</g>
+<!-- CART -->
+<g id="node9" class="node">
+<title>CART</title>
+<path fill="none" stroke="black" d="M418.2,-1431.6C418.2,-1431.6 328.94,-1431.6 328.94,-1431.6 322.94,-1431.6 316.94,-1425.6 316.94,-1419.6 316.94,-1419.6 316.94,-1407.6 316.94,-1407.6 316.94,-1401.6 322.94,-1395.6 328.94,-1395.6 328.94,-1395.6 418.2,-1395.6 418.2,-1395.6 424.2,-1395.6 430.2,-1401.6 430.2,-1407.6 430.2,-1407.6 430.2,-1419.6 430.2,-1419.6 430.2,-1425.6 424.2,-1431.6 418.2,-1431.6"/>
+<text xml:space="preserve" text-anchor="middle" x="373.57" y="-1409.4" font-family="Arial" font-size="14.00">Sepet İşlemleri</text>
+</g>
+<!-- SESSION&#45;&gt;CART -->
+<g id="edge9" class="edge">
+<title>SESSION-&gt;CART</title>
+<path fill="none" stroke="black" d="M383.64,-1503.57C381.8,-1487.29 378.98,-1462.42 376.8,-1443.12"/>
+<polygon fill="black" stroke="black" points="380.3,-1442.99 375.7,-1433.44 373.35,-1443.77 380.3,-1442.99"/>
+</g>
+<!-- LOOP_ADD -->
+<g id="node10" class="node">
+<title>LOOP_ADD</title>
+<path fill="none" stroke="black" d="M313.63,-1357.36C313.63,-1357.36 164.04,-1341.84 164.04,-1341.84 158.07,-1341.22 158.07,-1339.98 164.04,-1339.36 164.04,-1339.36 313.63,-1323.84 313.63,-1323.84 319.6,-1323.22 331.53,-1323.22 337.5,-1323.84 337.5,-1323.84 487.09,-1339.36 487.09,-1339.36 493.06,-1339.98 493.06,-1341.22 487.09,-1341.84 487.09,-1341.84 337.5,-1357.36 337.5,-1357.36 331.53,-1357.98 319.6,-1357.98 313.63,-1357.36"/>
+<text xml:space="preserve" text-anchor="middle" x="325.57" y="-1336.4" font-family="Arial" font-size="14.00">Ürün Eklemek İstiyor mu?</text>
+</g>
+<!-- CART&#45;&gt;LOOP_ADD -->
+<g id="edge10" class="edge">
+<title>CART-&gt;LOOP_ADD</title>
+<path fill="none" stroke="black" d="M361.95,-1395.41C356.18,-1386.88 349.1,-1376.41 342.73,-1366.98"/>
+<polygon fill="black" stroke="black" points="345.77,-1365.23 337.27,-1358.91 339.97,-1369.15 345.77,-1365.23"/>
+</g>
+<!-- STOCK_CHECK_ADD -->
+<g id="node11" class="node">
+<title>STOCK_CHECK_ADD</title>
+<path fill="none" stroke="black" d="M342.74,-1267.79C342.74,-1267.79 260.44,-1253.81 260.44,-1253.81 254.52,-1252.8 254.52,-1250.8 260.44,-1249.79 260.44,-1249.79 342.74,-1235.81 342.74,-1235.81 348.65,-1234.8 360.48,-1234.8 366.4,-1235.81 366.4,-1235.81 448.69,-1249.79 448.69,-1249.79 454.61,-1250.8 454.61,-1252.8 448.69,-1253.81 448.69,-1253.81 366.4,-1267.79 366.4,-1267.79 360.48,-1268.8 348.65,-1268.8 342.74,-1267.79"/>
+<text xml:space="preserve" text-anchor="middle" x="354.57" y="-1247.6" font-family="Arial" font-size="14.00">Stok &gt;= Adet ?</text>
+</g>
+<!-- LOOP_ADD&#45;&gt;STOCK_CHECK_ADD -->
+<g id="edge11" class="edge">
+<title>LOOP_ADD-&gt;STOCK_CHECK_ADD</title>
+<path fill="none" stroke="black" d="M331.16,-1322.86C335.24,-1310.66 340.85,-1293.86 345.56,-1279.77"/>
+<polygon fill="black" stroke="black" points="348.76,-1281.22 348.61,-1270.63 342.12,-1279 348.76,-1281.22"/>
+<text xml:space="preserve" text-anchor="middle" x="360.95" y="-1292" font-family="Arial" font-size="14.00">EVET</text>
+</g>
+<!-- CART_SHOW -->
+<g id="node14" class="node">
+<title>CART_SHOW</title>
+<path fill="none" stroke="black" d="M181.03,-1269.8C181.03,-1269.8 94.11,-1269.8 94.11,-1269.8 88.11,-1269.8 82.11,-1263.8 82.11,-1257.8 82.11,-1257.8 82.11,-1245.8 82.11,-1245.8 82.11,-1239.8 88.11,-1233.8 94.11,-1233.8 94.11,-1233.8 181.03,-1233.8 181.03,-1233.8 187.03,-1233.8 193.03,-1239.8 193.03,-1245.8 193.03,-1245.8 193.03,-1257.8 193.03,-1257.8 193.03,-1263.8 187.03,-1269.8 181.03,-1269.8"/>
+<text xml:space="preserve" text-anchor="middle" x="137.57" y="-1247.6" font-family="Arial" font-size="14.00">Sepeti Göster()</text>
+</g>
+<!-- LOOP_ADD&#45;&gt;CART_SHOW -->
+<g id="edge12" class="edge">
+<title>LOOP_ADD-&gt;CART_SHOW</title>
+<path fill="none" stroke="black" d="M226.26,-1332.44C204.03,-1327.12 181.75,-1318.48 163.78,-1304.6 155.95,-1298.56 150.28,-1289.54 146.25,-1280.71"/>
+<polygon fill="black" stroke="black" points="149.61,-1279.68 142.68,-1271.66 143.09,-1282.25 149.61,-1279.68"/>
+<text xml:space="preserve" text-anchor="middle" x="185.17" y="-1292" font-family="Arial" font-size="14.00">HAYIR</text>
+</g>
+<!-- ADD_OK -->
+<g id="node12" class="node">
+<title>ADD_OK</title>
+<path fill="none" stroke="black" d="M355.98,-1181C355.98,-1181 279.16,-1181 279.16,-1181 273.16,-1181 267.16,-1175 267.16,-1169 267.16,-1169 267.16,-1157 267.16,-1157 267.16,-1151 273.16,-1145 279.16,-1145 279.16,-1145 355.98,-1145 355.98,-1145 361.98,-1145 367.98,-1151 367.98,-1157 367.98,-1157 367.98,-1169 367.98,-1169 367.98,-1175 361.98,-1181 355.98,-1181"/>
+<text xml:space="preserve" text-anchor="middle" x="317.57" y="-1158.8" font-family="Arial" font-size="14.00">Sepete Ekle()</text>
+</g>
+<!-- STOCK_CHECK_ADD&#45;&gt;ADD_OK -->
+<g id="edge13" class="edge">
+<title>STOCK_CHECK_ADD-&gt;ADD_OK</title>
+<path fill="none" stroke="black" d="M347.78,-1234.88C342.63,-1222.79 335.41,-1205.87 329.33,-1191.59"/>
+<polygon fill="black" stroke="black" points="332.68,-1190.53 325.54,-1182.7 326.24,-1193.27 332.68,-1190.53"/>
+<text xml:space="preserve" text-anchor="middle" x="357.66" y="-1203.2" font-family="Arial" font-size="14.00">EVET</text>
+</g>
+<!-- ADD_FAIL -->
+<g id="node13" class="node">
+<title>ADD_FAIL</title>
+<path fill="none" stroke="black" d="M481.75,-1181C481.75,-1181 403.38,-1181 403.38,-1181 397.38,-1181 391.38,-1175 391.38,-1169 391.38,-1169 391.38,-1157 391.38,-1157 391.38,-1151 397.38,-1145 403.38,-1145 403.38,-1145 481.75,-1145 481.75,-1145 487.75,-1145 493.75,-1151 493.75,-1157 493.75,-1157 493.75,-1169 493.75,-1169 493.75,-1175 487.75,-1181 481.75,-1181"/>
+<text xml:space="preserve" text-anchor="middle" x="442.57" y="-1158.8" font-family="Arial" font-size="14.00">Yetersiz Stok!</text>
+</g>
+<!-- STOCK_CHECK_ADD&#45;&gt;ADD_FAIL -->
+<g id="edge14" class="edge">
+<title>STOCK_CHECK_ADD-&gt;ADD_FAIL</title>
+<path fill="none" stroke="black" d="M369.49,-1236.08C382.4,-1223.34 401.36,-1204.65 416.72,-1189.49"/>
+<polygon fill="black" stroke="black" points="419.09,-1192.07 423.75,-1182.56 414.18,-1187.09 419.09,-1192.07"/>
+<text xml:space="preserve" text-anchor="middle" x="427.84" y="-1203.2" font-family="Arial" font-size="14.00">HAYIR</text>
+</g>
+<!-- ADD_OK&#45;&gt;LOOP_ADD -->
+<g id="edge15" class="edge">
+<title>ADD_OK-&gt;LOOP_ADD</title>
+<path fill="none" stroke="black" d="M288.08,-1181.3C270.41,-1193.49 249.51,-1211.57 239.57,-1233.8 233.04,-1248.41 232.69,-1255.35 239.57,-1269.8 249.54,-1290.75 269.22,-1307.45 287.24,-1319.26"/>
+<polygon fill="black" stroke="black" points="285.37,-1322.23 295.72,-1324.52 289.06,-1316.28 285.37,-1322.23"/>
+</g>
+<!-- ADD_FAIL&#45;&gt;LOOP_ADD -->
+<g id="edge16" class="edge">
+<title>ADD_FAIL-&gt;LOOP_ADD</title>
+<path fill="none" stroke="black" d="M454.73,-1181.39C468.53,-1203.46 486.98,-1242.01 469.57,-1269.8 452.36,-1297.27 420.92,-1314.2 391.81,-1324.49"/>
+<polygon fill="black" stroke="black" points="391.05,-1321.05 382.65,-1327.51 393.24,-1327.7 391.05,-1321.05"/>
+</g>
+<!-- STOCK_CTRL -->
+<g id="node15" class="node">
+<title>STOCK_CTRL</title>
+<path fill="none" stroke="black" d="M226.77,-1181C226.77,-1181 50.36,-1181 50.36,-1181 44.36,-1181 38.36,-1175 38.36,-1169 38.36,-1169 38.36,-1157 38.36,-1157 38.36,-1151 44.36,-1145 50.36,-1145 50.36,-1145 226.77,-1145 226.77,-1145 232.77,-1145 238.77,-1151 238.77,-1157 238.77,-1157 238.77,-1169 238.77,-1169 238.77,-1175 232.77,-1181 226.77,-1181"/>
+<text xml:space="preserve" text-anchor="middle" x="138.57" y="-1158.8" font-family="Arial" font-size="14.00">Stok Kontrolü (Ödeme Öncesi)</text>
+</g>
+<!-- CART_SHOW&#45;&gt;STOCK_CTRL -->
+<g id="edge17" class="edge">
+<title>CART_SHOW-&gt;STOCK_CTRL</title>
+<path fill="none" stroke="black" d="M137.76,-1233.65C137.9,-1221.96 138.08,-1206.19 138.24,-1192.62"/>
+<polygon fill="black" stroke="black" points="141.73,-1192.96 138.35,-1182.92 134.73,-1192.88 141.73,-1192.96"/>
+</g>
+<!-- LOOP_STOCK -->
+<g id="node16" class="node">
+<title>LOOP_STOCK</title>
+<path fill="none" stroke="black" d="M130.78,-1105.74C130.78,-1105.74 60.58,-1092.26 60.58,-1092.26 54.68,-1091.13 54.68,-1088.87 60.58,-1087.74 60.58,-1087.74 130.78,-1074.26 130.78,-1074.26 136.67,-1073.13 148.46,-1073.13 154.35,-1074.26 154.35,-1074.26 224.56,-1087.74 224.56,-1087.74 230.45,-1088.87 230.45,-1091.13 224.56,-1092.26 224.56,-1092.26 154.35,-1105.74 154.35,-1105.74 148.46,-1106.87 136.67,-1106.87 130.78,-1105.74"/>
+<text xml:space="preserve" text-anchor="middle" x="142.57" y="-1085.8" font-family="Arial" font-size="14.00">Her Ürün için</text>
+</g>
+<!-- STOCK_CTRL&#45;&gt;LOOP_STOCK -->
+<g id="edge18" class="edge">
+<title>STOCK_CTRL-&gt;LOOP_STOCK</title>
+<path fill="none" stroke="black" d="M139.53,-1144.81C139.97,-1137.14 140.49,-1127.89 140.98,-1119.24"/>
+<polygon fill="black" stroke="black" points="144.45,-1119.72 141.52,-1109.54 137.47,-1119.33 144.45,-1119.72"/>
+</g>
+<!-- STOCK_OK -->
+<g id="node17" class="node">
+<title>STOCK_OK</title>
+<path fill="none" stroke="black" d="M148.74,-1032.99C148.74,-1032.99 66.44,-1019.01 66.44,-1019.01 60.52,-1018 60.52,-1016 66.44,-1014.99 66.44,-1014.99 148.74,-1001.01 148.74,-1001.01 154.65,-1000 166.48,-1000 172.4,-1001.01 172.4,-1001.01 254.69,-1014.99 254.69,-1014.99 260.61,-1016 260.61,-1018 254.69,-1019.01 254.69,-1019.01 172.4,-1032.99 172.4,-1032.99 166.48,-1034 154.65,-1034 148.74,-1032.99"/>
+<text xml:space="preserve" text-anchor="middle" x="160.57" y="-1012.8" font-family="Arial" font-size="14.00">Stok &gt;= Adet ?</text>
+</g>
+<!-- LOOP_STOCK&#45;&gt;STOCK_OK -->
+<g id="edge19" class="edge">
+<title>LOOP_STOCK-&gt;STOCK_OK</title>
+<path fill="none" stroke="black" d="M146.74,-1072.53C148.79,-1064.47 151.3,-1054.54 153.63,-1045.38"/>
+<polygon fill="black" stroke="black" points="156.98,-1046.4 156.04,-1035.85 150.19,-1044.68 156.98,-1046.4"/>
+</g>
+<!-- STOCK_FAIL -->
+<g id="node18" class="node">
+<title>STOCK_FAIL</title>
+<path fill="mistyrose" stroke="black" d="M467.04,-892.2C467.04,-892.2 324.09,-892.2 324.09,-892.2 318.09,-892.2 312.09,-886.2 312.09,-880.2 312.09,-880.2 312.09,-862.6 312.09,-862.6 312.09,-856.6 318.09,-850.6 324.09,-850.6 324.09,-850.6 467.04,-850.6 467.04,-850.6 473.04,-850.6 479.04,-856.6 479.04,-862.6 479.04,-862.6 479.04,-880.2 479.04,-880.2 479.04,-886.2 473.04,-892.2 467.04,-892.2"/>
+<text xml:space="preserve" text-anchor="middle" x="395.57" y="-875.6" font-family="Arial" font-size="14.00">Bazı Ürünler Stokta Yok</text>
+<text xml:space="preserve" text-anchor="middle" x="395.57" y="-858.8" font-family="Arial" font-size="14.00">Sipariş Engellendi</text>
+</g>
+<!-- STOCK_OK&#45;&gt;STOCK_FAIL -->
+<g id="edge20" class="edge">
+<title>STOCK_OK-&gt;STOCK_FAIL</title>
+<path fill="none" stroke="black" d="M200.27,-1005.38C236.47,-994.43 290.29,-974.9 330.57,-946.2 347.72,-933.97 363.44,-916.39 375.12,-901.45"/>
+<polygon fill="black" stroke="black" points="377.69,-903.86 380.94,-893.77 372.11,-899.63 377.69,-903.86"/>
+<text xml:space="preserve" text-anchor="middle" x="321.6" y="-968.4" font-family="Arial" font-size="14.00">HAYIR</text>
+</g>
+<!-- DISCOUNT -->
+<g id="node19" class="node">
+<title>DISCOUNT</title>
+<path fill="none" stroke="black" d="M148.64,-944.86C148.64,-944.86 11.93,-929.54 11.93,-929.54 5.96,-928.87 5.96,-927.53 11.93,-926.86 11.93,-926.86 148.64,-911.54 148.64,-911.54 154.6,-910.87 166.53,-910.87 172.49,-911.54 172.49,-911.54 309.21,-926.86 309.21,-926.86 315.17,-927.53 315.17,-928.87 309.21,-929.54 309.21,-929.54 172.49,-944.86 172.49,-944.86 166.53,-945.53 154.6,-945.53 148.64,-944.86"/>
+<text xml:space="preserve" text-anchor="middle" x="160.57" y="-924" font-family="Arial" font-size="14.00">İndirim Kodu Girildi mi?</text>
+</g>
+<!-- STOCK_OK&#45;&gt;DISCOUNT -->
+<g id="edge21" class="edge">
+<title>STOCK_OK-&gt;DISCOUNT</title>
+<path fill="none" stroke="black" d="M160.57,-998.85C160.57,-987.16 160.57,-971.39 160.57,-957.82"/>
+<polygon fill="black" stroke="black" points="164.07,-958.12 160.57,-948.12 157.07,-958.12 164.07,-958.12"/>
+<text xml:space="preserve" text-anchor="middle" x="178.85" y="-968.4" font-family="Arial" font-size="14.00">EVET</text>
+</g>
+<!-- STOCK_FAIL&#45;&gt;END -->
+<g id="edge22" class="edge">
+<title>STOCK_FAIL-&gt;END</title>
+<path fill="none" stroke="black" d="M420.48,-850.37C440.24,-832.08 464.57,-803.09 464.57,-771.2 464.57,-771.2 464.57,-771.2 464.57,-90 464.57,-73.67 456.33,-57.71 447.24,-45.07"/>
+<polygon fill="black" stroke="black" points="450.08,-43.03 441.17,-37.3 444.57,-47.34 450.08,-43.03"/>
+</g>
+<!-- DISCOUNT_VALID -->
+<g id="node20" class="node">
+<title>DISCOUNT_VALID</title>
+<path fill="none" stroke="black" d="M278.71,-830.72C278.71,-830.72 188.9,-816.48 188.9,-816.48 182.97,-815.54 182.97,-813.66 188.9,-812.72 188.9,-812.72 278.71,-798.48 278.71,-798.48 284.64,-797.54 296.49,-797.54 302.42,-798.48 302.42,-798.48 392.24,-812.72 392.24,-812.72 398.16,-813.66 398.16,-815.54 392.24,-816.48 392.24,-816.48 302.42,-830.72 302.42,-830.72 296.49,-831.66 284.64,-831.66 278.71,-830.72"/>
+<text xml:space="preserve" text-anchor="middle" x="290.57" y="-810.4" font-family="Arial" font-size="14.00">Kod Geçerli mi?</text>
+</g>
+<!-- DISCOUNT&#45;&gt;DISCOUNT_VALID -->
+<g id="edge23" class="edge">
+<title>DISCOUNT-&gt;DISCOUNT_VALID</title>
+<path fill="none" stroke="black" d="M178.37,-911.92C200.76,-892.69 239.37,-859.55 264.94,-837.6"/>
+<polygon fill="black" stroke="black" points="266.94,-840.5 272.24,-831.33 262.38,-835.19 266.94,-840.5"/>
+<text xml:space="preserve" text-anchor="middle" x="266.8" y="-867.2" font-family="Arial" font-size="14.00">EVET</text>
+</g>
+<!-- SHIPPING -->
+<g id="node23" class="node">
+<title>SHIPPING</title>
+<path fill="none" stroke="black" d="M278.6,-670.8C278.6,-670.8 174.54,-670.8 174.54,-670.8 168.54,-670.8 162.54,-664.8 162.54,-658.8 162.54,-658.8 162.54,-646.8 162.54,-646.8 162.54,-640.8 168.54,-634.8 174.54,-634.8 174.54,-634.8 278.6,-634.8 278.6,-634.8 284.6,-634.8 290.6,-640.8 290.6,-646.8 290.6,-646.8 290.6,-658.8 290.6,-658.8 290.6,-664.8 284.6,-670.8 278.6,-670.8"/>
+<text xml:space="preserve" text-anchor="middle" x="226.57" y="-648.6" font-family="Arial" font-size="14.00">Kargo Hesaplama</text>
+</g>
+<!-- DISCOUNT&#45;&gt;SHIPPING -->
+<g id="edge24" class="edge">
+<title>DISCOUNT-&gt;SHIPPING</title>
+<path fill="none" stroke="black" d="M156.86,-910.24C149.37,-872.01 135.74,-777.06 167.57,-707.8 172.71,-696.61 181.36,-686.7 190.49,-678.51"/>
+<polygon fill="black" stroke="black" points="192.65,-681.26 198.11,-672.18 188.18,-675.88 192.65,-681.26"/>
+<text xml:space="preserve" text-anchor="middle" x="172.95" y="-766" font-family="Arial" font-size="14.00">HAYIR</text>
+</g>
+<!-- APPLY_DISCOUNT -->
+<g id="node21" class="node">
+<title>APPLY_DISCOUNT</title>
+<path fill="none" stroke="black" d="M401.91,-743.8C401.91,-743.8 307.22,-743.8 307.22,-743.8 301.22,-743.8 295.22,-737.8 295.22,-731.8 295.22,-731.8 295.22,-719.8 295.22,-719.8 295.22,-713.8 301.22,-707.8 307.22,-707.8 307.22,-707.8 401.91,-707.8 401.91,-707.8 407.91,-707.8 413.91,-713.8 413.91,-719.8 413.91,-719.8 413.91,-731.8 413.91,-731.8 413.91,-737.8 407.91,-743.8 401.91,-743.8"/>
+<text xml:space="preserve" text-anchor="middle" x="354.57" y="-721.6" font-family="Arial" font-size="14.00">İndirim Uygula()</text>
+</g>
+<!-- DISCOUNT_VALID&#45;&gt;APPLY_DISCOUNT -->
+<g id="edge25" class="edge">
+<title>DISCOUNT_VALID-&gt;APPLY_DISCOUNT</title>
+<path fill="none" stroke="black" d="M302.01,-798.08C311.15,-785.68 324.18,-768.01 334.97,-753.37"/>
+<polygon fill="black" stroke="black" points="337.67,-755.62 340.79,-745.49 332.03,-751.46 337.67,-755.62"/>
+<text xml:space="preserve" text-anchor="middle" x="346.58" y="-766" font-family="Arial" font-size="14.00">EVET</text>
+</g>
+<!-- INVALID_DISCOUNT -->
+<g id="node22" class="node">
+<title>INVALID_DISCOUNT</title>
+<path fill="none" stroke="black" d="M264.97,-743.8C264.97,-743.8 188.16,-743.8 188.16,-743.8 182.16,-743.8 176.16,-737.8 176.16,-731.8 176.16,-731.8 176.16,-719.8 176.16,-719.8 176.16,-713.8 182.16,-707.8 188.16,-707.8 188.16,-707.8 264.97,-707.8 264.97,-707.8 270.97,-707.8 276.97,-713.8 276.97,-719.8 276.97,-719.8 276.97,-731.8 276.97,-731.8 276.97,-737.8 270.97,-743.8 264.97,-743.8"/>
+<text xml:space="preserve" text-anchor="middle" x="226.57" y="-721.6" font-family="Arial" font-size="14.00">Geçersiz Kod</text>
+</g>
+<!-- DISCOUNT_VALID&#45;&gt;INVALID_DISCOUNT -->
+<g id="edge26" class="edge">
+<title>DISCOUNT_VALID-&gt;INVALID_DISCOUNT</title>
+<path fill="none" stroke="black" d="M279.12,-798.08C269.98,-785.68 256.96,-768.01 246.16,-753.37"/>
+<polygon fill="black" stroke="black" points="249.1,-751.46 240.35,-745.49 243.47,-755.62 249.1,-751.46"/>
+<text xml:space="preserve" text-anchor="middle" x="285.69" y="-766" font-family="Arial" font-size="14.00">HAYIR</text>
+</g>
+<!-- APPLY_DISCOUNT&#45;&gt;SHIPPING -->
+<g id="edge27" class="edge">
+<title>APPLY_DISCOUNT-&gt;SHIPPING</title>
+<path fill="none" stroke="black" d="M323.25,-707.43C306.6,-698.19 285.9,-686.71 267.93,-676.75"/>
+<polygon fill="black" stroke="black" points="269.77,-673.76 259.32,-671.97 266.37,-679.88 269.77,-673.76"/>
+</g>
+<!-- INVALID_DISCOUNT&#45;&gt;SHIPPING -->
+<g id="edge28" class="edge">
+<title>INVALID_DISCOUNT-&gt;SHIPPING</title>
+<path fill="none" stroke="black" d="M226.57,-707.61C226.57,-700.03 226.57,-690.9 226.57,-682.34"/>
+<polygon fill="black" stroke="black" points="230.07,-682.34 226.57,-672.34 223.07,-682.34 230.07,-682.34"/>
+</g>
+<!-- SELECT_SHIP -->
+<g id="node24" class="node">
+<title>SELECT_SHIP</title>
+<path fill="none" stroke="black" d="M260.3,-597.8C260.3,-597.8 192.83,-597.8 192.83,-597.8 186.83,-597.8 180.83,-591.8 180.83,-585.8 180.83,-585.8 180.83,-573.8 180.83,-573.8 180.83,-567.8 186.83,-561.8 192.83,-561.8 192.83,-561.8 260.3,-561.8 260.3,-561.8 266.3,-561.8 272.3,-567.8 272.3,-573.8 272.3,-573.8 272.3,-585.8 272.3,-585.8 272.3,-591.8 266.3,-597.8 260.3,-597.8"/>
+<text xml:space="preserve" text-anchor="middle" x="226.57" y="-575.6" font-family="Arial" font-size="14.00">Kargo Seç()</text>
+</g>
+<!-- SHIPPING&#45;&gt;SELECT_SHIP -->
+<g id="edge29" class="edge">
+<title>SHIPPING-&gt;SELECT_SHIP</title>
+<path fill="none" stroke="black" d="M226.57,-634.61C226.57,-627.03 226.57,-617.9 226.57,-609.34"/>
+<polygon fill="black" stroke="black" points="230.07,-609.34 226.57,-599.34 223.07,-609.34 230.07,-609.34"/>
+</g>
+<!-- TOTAL -->
+<g id="node25" class="node">
+<title>TOTAL</title>
+<path fill="none" stroke="black" d="M298.84,-524.8C298.84,-524.8 154.3,-524.8 154.3,-524.8 148.3,-524.8 142.3,-518.8 142.3,-512.8 142.3,-512.8 142.3,-500.8 142.3,-500.8 142.3,-494.8 148.3,-488.8 154.3,-488.8 154.3,-488.8 298.84,-488.8 298.84,-488.8 304.84,-488.8 310.84,-494.8 310.84,-500.8 310.84,-500.8 310.84,-512.8 310.84,-512.8 310.84,-518.8 304.84,-524.8 298.84,-524.8"/>
+<text xml:space="preserve" text-anchor="middle" x="226.57" y="-502.6" font-family="Arial" font-size="14.00">Toplam = Sepet + Kargo</text>
+</g>
+<!-- SELECT_SHIP&#45;&gt;TOTAL -->
+<g id="edge30" class="edge">
+<title>SELECT_SHIP-&gt;TOTAL</title>
+<path fill="none" stroke="black" d="M226.57,-561.61C226.57,-554.03 226.57,-544.9 226.57,-536.34"/>
+<polygon fill="black" stroke="black" points="230.07,-536.34 226.57,-526.34 223.07,-536.34 230.07,-536.34"/>
+</g>
+<!-- PAYMENT -->
+<g id="node26" class="node">
+<title>PAYMENT</title>
+<path fill="none" stroke="black" d="M275.48,-451.8C275.48,-451.8 177.66,-451.8 177.66,-451.8 171.66,-451.8 165.66,-445.8 165.66,-439.8 165.66,-439.8 165.66,-427.8 165.66,-427.8 165.66,-421.8 171.66,-415.8 177.66,-415.8 177.66,-415.8 275.48,-415.8 275.48,-415.8 281.48,-415.8 287.48,-421.8 287.48,-427.8 287.48,-427.8 287.48,-439.8 287.48,-439.8 287.48,-445.8 281.48,-451.8 275.48,-451.8"/>
+<text xml:space="preserve" text-anchor="middle" x="226.57" y="-429.6" font-family="Arial" font-size="14.00">Ödeme Aşaması</text>
+</g>
+<!-- TOTAL&#45;&gt;PAYMENT -->
+<g id="edge31" class="edge">
+<title>TOTAL-&gt;PAYMENT</title>
+<path fill="none" stroke="black" d="M226.57,-488.61C226.57,-481.03 226.57,-471.9 226.57,-463.34"/>
+<polygon fill="black" stroke="black" points="230.07,-463.34 226.57,-453.34 223.07,-463.34 230.07,-463.34"/>
+</g>
+<!-- PAY_METHOD -->
+<g id="node27" class="node">
+<title>PAY_METHOD</title>
+<path fill="none" stroke="black" d="M290.65,-378.8C290.65,-378.8 162.49,-378.8 162.49,-378.8 156.49,-378.8 150.49,-372.8 150.49,-366.8 150.49,-366.8 150.49,-354.8 150.49,-354.8 150.49,-348.8 156.49,-342.8 162.49,-342.8 162.49,-342.8 290.65,-342.8 290.65,-342.8 296.65,-342.8 302.65,-348.8 302.65,-354.8 302.65,-354.8 302.65,-366.8 302.65,-366.8 302.65,-372.8 296.65,-378.8 290.65,-378.8"/>
+<text xml:space="preserve" text-anchor="middle" x="226.57" y="-356.6" font-family="Arial" font-size="14.00">Ödeme Yöntemi Seç()</text>
+</g>
+<!-- PAYMENT&#45;&gt;PAY_METHOD -->
+<g id="edge32" class="edge">
+<title>PAYMENT-&gt;PAY_METHOD</title>
+<path fill="none" stroke="black" d="M226.57,-415.61C226.57,-408.03 226.57,-398.9 226.57,-390.34"/>
+<polygon fill="black" stroke="black" points="230.07,-390.34 226.57,-380.34 223.07,-390.34 230.07,-390.34"/>
+</g>
+<!-- PAY_RESULT -->
+<g id="node28" class="node">
+<title>PAY_RESULT</title>
+<path fill="none" stroke="black" d="M214.66,-304.33C214.66,-304.33 92.32,-289.27 92.32,-289.27 86.37,-288.53 86.37,-287.07 92.32,-286.33 92.32,-286.33 214.66,-271.27 214.66,-271.27 220.61,-270.53 232.52,-270.53 238.48,-271.27 238.48,-271.27 360.81,-286.33 360.81,-286.33 366.77,-287.07 366.77,-288.53 360.81,-289.27 360.81,-289.27 238.48,-304.33 238.48,-304.33 232.52,-305.07 220.61,-305.07 214.66,-304.33"/>
+<text xml:space="preserve" text-anchor="middle" x="226.57" y="-283.6" font-family="Arial" font-size="14.00">Ödeme Başarılı mı?</text>
+</g>
+<!-- PAY_METHOD&#45;&gt;PAY_RESULT -->
+<g id="edge33" class="edge">
+<title>PAY_METHOD-&gt;PAY_RESULT</title>
+<path fill="none" stroke="black" d="M226.57,-342.61C226.57,-335.03 226.57,-325.9 226.57,-317.34"/>
+<polygon fill="black" stroke="black" points="230.07,-317.34 226.57,-307.34 223.07,-317.34 230.07,-317.34"/>
+</g>
+<!-- PAY_OK -->
+<g id="node29" class="node">
+<title>PAY_OK</title>
+<path fill="none" stroke="black" d="M424.91,-217C424.91,-217 130.23,-217 130.23,-217 124.23,-217 118.23,-211 118.23,-205 118.23,-205 118.23,-193 118.23,-193 118.23,-187 124.23,-181 130.23,-181 130.23,-181 424.91,-181 424.91,-181 430.91,-181 436.91,-187 436.91,-193 436.91,-193 436.91,-205 436.91,-205 436.91,-211 430.91,-217 424.91,-217"/>
+<text xml:space="preserve" text-anchor="middle" x="277.57" y="-194.8" font-family="Arial" font-size="14.00">Sipariş Oluştur + Stok Güncelle + Fatura Oluştur</text>
+</g>
+<!-- PAY_RESULT&#45;&gt;PAY_OK -->
+<g id="edge34" class="edge">
+<title>PAY_RESULT-&gt;PAY_OK</title>
+<path fill="none" stroke="black" d="M235.92,-270.88C243.09,-258.67 253.16,-241.53 261.6,-227.17"/>
+<polygon fill="black" stroke="black" points="264.58,-229.01 266.63,-218.61 258.55,-225.46 264.58,-229.01"/>
+<text xml:space="preserve" text-anchor="middle" x="274.92" y="-239.2" font-family="Arial" font-size="14.00">EVET</text>
+</g>
+<!-- PAY_FAIL -->
+<g id="node30" class="node">
+<title>PAY_FAIL</title>
+<path fill="mistyrose" stroke="black" d="M155.37,-163C155.37,-163 49.77,-163 49.77,-163 43.77,-163 37.77,-157 37.77,-151 37.77,-151 37.77,-139 37.77,-139 37.77,-133 43.77,-127 49.77,-127 49.77,-127 155.37,-127 155.37,-127 161.37,-127 167.37,-133 167.37,-139 167.37,-139 167.37,-151 167.37,-151 167.37,-157 161.37,-163 155.37,-163"/>
+<text xml:space="preserve" text-anchor="middle" x="102.57" y="-140.8" font-family="Arial" font-size="14.00">Ödeme Başarısız</text>
+</g>
+<!-- PAY_RESULT&#45;&gt;PAY_FAIL -->
+<g id="edge35" class="edge">
+<title>PAY_RESULT-&gt;PAY_FAIL</title>
+<path fill="none" stroke="black" d="M187.48,-274.13C160.88,-263.34 127.38,-245.06 109.57,-217 101.71,-204.63 99.62,-188.52 99.65,-174.78"/>
+<polygon fill="black" stroke="black" points="103.14,-175.11 100.06,-164.97 96.14,-174.82 103.14,-175.11"/>
+<text xml:space="preserve" text-anchor="middle" x="166.17" y="-239.2" font-family="Arial" font-size="14.00">HAYIR</text>
+</g>
+<!-- POST_ORDER -->
+<g id="node31" class="node">
+<title>POST_ORDER</title>
+<path fill="none" stroke="black" d="M412.09,-109C412.09,-109 215.05,-109 215.05,-109 209.05,-109 203.05,-103 203.05,-97 203.05,-97 203.05,-85 203.05,-85 203.05,-79 209.05,-73 215.05,-73 215.05,-73 412.09,-73 412.09,-73 418.09,-73 424.09,-79 424.09,-85 424.09,-85 424.09,-97 424.09,-97 424.09,-103 418.09,-109 412.09,-109"/>
+<text xml:space="preserve" text-anchor="middle" x="313.57" y="-86.8" font-family="Arial" font-size="14.00">Kargo Gönder + Durum Güncelle</text>
+</g>
+<!-- PAY_OK&#45;&gt;POST_ORDER -->
+<g id="edge36" class="edge">
+<title>PAY_OK-&gt;POST_ORDER</title>
+<path fill="none" stroke="black" d="M283.35,-180.97C288.93,-164.53 297.48,-139.35 304.07,-119.97"/>
+<polygon fill="black" stroke="black" points="307.29,-121.37 307.19,-110.77 300.66,-119.12 307.29,-121.37"/>
+</g>
+<!-- PAY_FAIL&#45;&gt;END -->
+<g id="edge38" class="edge">
+<title>PAY_FAIL-&gt;END</title>
+<path fill="none" stroke="black" d="M119.81,-126.76C137.04,-110.51 165.01,-86.67 193.57,-73 240.03,-50.75 296.27,-37.33 341.51,-29.44"/>
+<polygon fill="black" stroke="black" points="341.98,-32.91 351.26,-27.8 340.82,-26.01 341.98,-32.91"/>
+</g>
+<!-- POST_ORDER&#45;&gt;END -->
+<g id="edge37" class="edge">
+<title>POST_ORDER-&gt;END</title>
+<path fill="none" stroke="black" d="M340.48,-72.63C355.01,-63.25 373.13,-51.55 388.73,-41.48"/>
+<polygon fill="black" stroke="black" points="390.29,-44.64 396.8,-36.28 386.5,-38.76 390.29,-44.64"/>
+</g>
+</g>
+</svg>
