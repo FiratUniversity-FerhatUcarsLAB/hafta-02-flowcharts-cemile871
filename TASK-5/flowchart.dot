@@ -1,0 +1,33 @@
+digraph AkilliEvGuvenlikSistemi {
+    rankdir=TB;
+    node [shape=rectangle, style=rounded, fontname="Arial"];
+
+    Start [label="BAŞLA"];
+    SensörOkuma [label="Sensörleri Oku"];
+    TehditAlgılama [label="Tehdit Algıla"];
+    AlarmVer [label="Alarm Ver"];
+    AlarmKontrol [label="Alarm açık mı?"];
+    AlarmSıfırla [label="Kullanıcı alarm sıfırladı mı?"];
+    Sıfırlaİşlem [label="Alarmı Sıfırla"];
+    Bekle [label="Bekle (1 saniye)"];
+    End [label="BİTİR"];
+
+    // Akış bağlantıları
+    Start -> SensörOkuma;
+    SensörOkuma -> TehditAlgılama;
+    TehditAlgılama -> AlarmVer;
+    AlarmVer -> AlarmKontrol;
+
+    // Alarm kontrol dalları
+    AlarmKontrol -> AlarmSıfırla [label="Evet"];
+    AlarmKontrol -> Bekle [label="Hayır"];
+    AlarmSıfırla -> Sıfırlaİşlem [label="Evet"];
+    AlarmSıfırla -> Bekle [label="Hayır"];
+    Sıfırlaİşlem -> Bekle;
+
+    // Sonsuz döngü (ana döngü)
+    Bekle -> SensörOkuma [label="sürekli", color="blue"];
+
+    // Bitiş (teorik)
+    End [shape=ellipse, style=dashed, label="BİTİR (opsiyonel)"];
+}
