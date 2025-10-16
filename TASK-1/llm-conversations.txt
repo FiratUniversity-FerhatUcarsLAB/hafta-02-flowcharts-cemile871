@@ -1,0 +1,9 @@
+“ATM para çekme sistemi için detaylı pseudocode yazmanı istiyorum. 
+şunları içermeli: PIN doğrulama (3 hak), bakiye kontrolü, tutar 
+kontrolü (20 TL katları), günlük limit kontrolü, işlem tekrarı seçeneği. Tüm 
+adımları BAŞLA, OKU, YAZ, EGER-
+İSE, DONGÜ yapılarıyla yaz.”
+Şunu dedin:
+“Bu pseudocode’u Graphviz DOT diline çevir. Başla/Bitir için oval, 
+girdi/çıktı için parallelogram, işlem için box, karar için diamond kullan. 
+Tüm okları ve etiketleri ekle.”
