@@ -1,0 +1,859 @@
+“E-ticaret sitesinde sepet yonetimi ve odeme sistemini adım adım acıkla. 
+Kullanıcı girisi, urun ekleme, stok kontrolu, indirim kodu, kargo hesaplama 
+ve odeme asamalarını icermeli.” 
+ChatGPT:
+9s boyunca düşündüm
+
+Harika — aşağıda e-ticaret sitesinde sepet yönetimi ve ödeme sistemi için adım adım, hem iş akışı (flow) hem de pratik uygulama (DB, API, güvenlik, hata-durumları) içeren kapsamlı bir rehber hazırladım. Türkçe ve anlaşılır örneklerle ilerledim; istersen bu yapıyı Node.js/Express veya başka bir stack için doğrudan çalışır hâle getiririz.
+
+1) Yüksek seviyede akış (özet)
+
+Kullanıcı giriş/kimlik doğrulama (guest checkout seçeneği olabilir).
+
+Ürün listeleme → “Sepete ekle” ile geçici sepet oluşturma/ güncelleme.
+
+Stok kontrolu / rezervasyon (sepete eklenince kısa süreli rezervasyon veya sadece checkout sırasında düşme).
+
+İndirim kodu doğrulama uygulanması.
+
+Kargo hesaplama (adres, ağırlık/volumetrik, taşıyıcı ve teslimat hızı).
+
+Ödeme (kart/taksit, 3DS, cüzdanlar, alternatif) — ödeme sağlayıcısına token gönderilir.
+
+Ödeme onayı → sipariş oluşturma, stok kesme (final), fatura ve kargo işlemleri.
+
+Webhook ile ödeme sağlayıcısından asenkron doğrulama (ve hatalarda idempotens).
+
+2) Temel veri modelleri (örnek tablolar / koleksiyonlar)
+
+users: id, email, password_hash, name, default_address_id, created_at
+
+products: id, sku, title, price, weight, dimensions, stock_available, stock_reserved, active, metadata
+
+variants (isteğe bağlı): product_id, sku, attributes, stock_available
+
+carts: id, user_id (nullable), session_id, items[], coupon_id (nullable), shipping_address, billing_address, created_at, expires_at
+
+cart_items: cart_id, product_id, sku, qty, unit_price, reserved_at
+
+coupons: code, type (percent/fixed/free_shipping), value, expires_at, usage_limit, min_order_amount, applies_to (categories/skus)
+
+orders: id, user_id, order_number, total_amount, status (pending/paid/failed/fulfilled), payment_id, shipping_id, created_at
+
+payments: id, order_id, provider, provider_payment_id, status, amount, currency, meta
+
+shipments: id, order_id, carrier, service, cost, tracking_number, status
+
+3) Kullanıcı girişi (auth)
+
+Endpoint’ler: POST /auth/register, POST /auth/login, POST /auth/refresh, POST /auth/logout
+
+Token: short-lived JWT (access) + refresh token; oturumları DB’de izleyin.
+
+Guest checkout: guest user veya session_id ile cart ilişkilendirin.
+
+Güvenlik: parola hashing (bcrypt/argon2), rate limit login, MFA opsiyonel.
+
+4) Sepete ürün ekleme — adımlar & kurallar
+
+Kullanıcı / misafir "Sepete Ekle" butonuna basar. İstek: POST /cart/items { sku, qty }.
+
+Backend:
+
+Ürünü ve mevcut stoğu al (SELECT stock_available, stock_reserved).
+
+Basit kontrol: if qty <= stock_available - stock_reserved ⇒ başarılı.
+
+Sepeti oluştur/yükle (user_id veya session_id). Sepet item’ı ekle/güncelle.
+
+(Opsiyonel) Kısa süreli rezervasyon: stock_reserved += qty, cart_items.reserved_at = now(), rezervasyon süresi (örn. 15 dk).
+
+Döndür: güncellenmiş cart (itemlar, subtotal, tahmini kargo).
+
+UI: kullanıcıya stok uyarısı, kalan adedi göster; "sepette tut" süresi sayacı göster (eğer rezervasyon yapıyorsanız).
+
+5) Stok yönetimi: rezervasyon vs direkt düşme
+
+Seçenek A (basit): Stok sadece ödeme başarıyla sonuçlandığında düşer. Avantaj: kolay; Dezavantaj: oversell riski.
+
+Seçenek B (tavsiye): Sepete eklenince rezervasyon (ör. 15 dk). Rezervasyon süresi dolarsa otomatik serbest bırak. Ödeme onaylandığında rezervasyon → kalıcı düşüş.
+
+Teknik:
+
+transactions / DB lock (row-level) ile concurrency kontrolü: UPDATE products SET stock_reserved = stock_reserved + X WHERE sku = ? AND stock_available - stock_reserved >= X RETURNING ...
+
+Redis de kullanılabilir (hızlı rezervasyon, TTL ile otomatik serbest bırakma).
+
+6) İndirim kodu (coupon) akışı
+
+Endpoint: POST /cart/apply-coupon { code }
+
+Doğrulama adımları:
+
+Kod var mı, aktif mi, süresi geçmedi mi?
+
+Koda ait kullanım limiti / kullanıcı başına limit.
+
+Min sipariş tutarı, ürün/kategori kısıtlamaları.
+
+Kombinasyon kuralları (stackable mı?).
+
+Uygulama: sepet toplamı güncellenir; kupon meta bilgisi cart’a kaydedilir (kuponun orijinal kuralları order snapshot’a kaydedilmeli).
+
+Edge: kupon sepetteki ürün değişince yeniden doğrulanmalı.
+
+7) Kargo hesaplama (detaylı)
+
+Girdi: shipping_address (ülke, il/ilçe/posta kodu), paket ağırlığı, ölçüler, gönderim hızı, carrier tercihleri.
+
+Yaklaşımlar:
+
+Basit: sabit ücret, veya postakodu aralığına göre table rate.
+
+Orta: ağırlık × bölge → tablolardan hesapla.
+
+Gelişmiş: carrier API (UPS, FedEx, PTT, Yurtiçi Kargo) ile gerçek zamanlı fiyat al.
+
+Örnek akış:
+
+Sepetteki tüm itemların ağırlığını ve hacmini topla.
+
+Zone = lookup(shipping_address.postal_code).
+
+rate = lookup_table(zone, weight) veya carrier_api.getRates(payload).
+
+Kullanıcıya seçenekleri göster (Standart, Hızlı, Aynı Gün) ve maliyet seçilene kaydet.
+
+Vergiler: kargo ücretine KDV/vergiler eklenebilir — ülke/regülatif kurala göre.
+
+8) Checkout (Ödeme) — adımlar
+
+Kullanıcı checkout sayfasını açar — doğrula: stok, fiyat, kupon geçerliliği.
+
+Endpoint: POST /checkout { cart_id, billing_address, shipping_address, shipping_option, payment_method }
+
+Backend:
+
+Final stok rezervasyon kontrolü (atomic): ürünleri decrement etmek için hazırla.
+
+Sipariş satırı oluştur (order draft) — status = pending. Snapshot: fiyatlar, kupon, vergi, kargo.
+
+Ödeme sağlayıcısına yönlendir/bir token oluştur: örn. ödeme sağlayıcıya client token (Stripe: PaymentIntent, Braintree: client token).
+
+Ödeme işlemi (client side):
+
+Kart bilgisi doğrudan sunucuya gönderilmez: ödeme sağlayıcısının JS SDK’sı ile token/nonce alınır.
+
+3-D Secure gerekiyorsa sağlayıcı redirect/iframe ile 3DS adımını yönetir.
+
+Sunucuya ödeme token ile POST /payments/confirm { order_id, payment_token }
+
+Sunucu:
+
+Ödeme sağlayıcısına ödeme isteği gönderir (amount, currency, metadata order_id).
+
+Response başarılıysa: payment.status = succeeded → order.status = paid (veya processing). Stok decrement kalıcı hale gelir. Fatura/gönderi oluştur.
+
+Response beklemeli/asenkron: birçok sağlayıcı webhook gönderir; webhook güvenilir kaynak olarak kabul edilmeli.
+
+Hatalar: ödeme reddedilirse → order.status = failed, rezervasyon geri verilir, kullanıcı bilgilendirilir.
+
+9) Ödeme sağlayıcısı entegrasyonu (best practices)
+
+Ödeme akışı (örnek Stripe benzeri):
+
+Backend: POST /create-payment-intent { amount, currency, order_id } → dönen client_secret ile client yükü tamamlar.
+
+Client: stripe.confirmCardPayment(client_secret, payment_method_data) → 3DS vs card flow.
+
+Stripe webhook: payment_intent.succeeded → sunucu order'ı finalizes eder.
+
+Güvenlik:
+
+PCI DSS: kredi kartı numaraları sunucuda saklanmamalı; sağlayıcı tokenizasyon yapmalı.
+
+İdempotens: ödeme çağrılarına idempotency key ekle (provider destekliyorsa) — duplicate charge engelleme.
+
+Webhook doğrulama: signature doğrula (provider secret).
+
+Ödeme yöntemleri: kart (token), Apple/Google Pay, banka transferi (provizyon farkları), taksit, cüzdanlar. Her birinin yönlendirme/confirmation akışı farklı olabilir.
+
+10) Webhook & asenkron işlemler
+
+Örnek webhooks: payment_succeeded, payment_failed, charge.refunded.
+
+Webhook endpoint: POST /webhooks/payments (imzalı).
+
+Yapılacaklar: idempotent işlem (aynı webhook tekrar gelse bile birden fazla işleme izin verme), order status güncelle, stok ve faturayı finalize et.
+
+Loglama: tüm webhook payload’larını depola + signature doğrula.
+
+11) Hata ve edge-case yönetimi
+
+Stok yarışması (concurrent checkouts): DB transaction + optimistic locking veya row locks kullan.
+
+Fiyat değişimi: checkout başlangıcında fiyat kilitleme (snapshot) veya fiyat farkı durumunda kullanıcıyı bilgilendir.
+
+Kupon son kullanım anı: kuponu application sırasında değil ödeme onayında final doğrulama.
+
+Kargo hatası: carrier API hata dönerse fallback table rate.
+
+Ödeme yarıda kalırsa (3DS cancel): rezervasyon TTL ile geri verilmeli ve kullanıcıya tekrar deneme imkanı sunulmalı.
+
+İptaller & iadeler: payment.refund API kullanımı + stokun tekrar artışı.
+
+12) API örnekleri (özet)
+
+GET /cart -> sepet bilgisi
+
+POST /cart/items { sku, qty } -> ekle/güncelle
+
+DELETE /cart/items/{item_id} -> sil
+
+POST /cart/apply-coupon { code }
+
+POST /checkout { cart_id, shipping_option, billing_address } -> sipariş oluştur (draft)
+
+POST /payments/confirm { order_id, payment_token }
+
+POST /webhooks/payments -> ödeme sağlayıcısından gelenler
+
+Kısa örnek (pseudo-SQL rezervasyon):
+
+BEGIN;
+UPDATE products
+SET stock_reserved = stock_reserved + :qty
+WHERE sku = :sku AND (stock_available - stock_reserved) >= :qty;
+-- check rows affected
+COMMIT;
+
+13) UI / UX önerileri
+
+Sepette kalan stok sayısını göster, rezervasyon sayaçları.
+
+Ödeme formunda: kart logosu, güvenlikle ilgili kısa not ("Kart bilgileriniz güvenli olarak...").
+
+Ödeme başarısızsa neden (reddedildi: banka, yetersiz bakiye, 3D doğrulama iptali) açık göster.
+
+Misafir checkout ama kullanıcıya hesap oluşturmayı kolaylaştır (checkout sonrası tek tıkla hesap oluştur).
+
+Mobil için optimize edilmiş ödeme akışı (tek sayfa, kolay kopyala-yapıştır kart).
+
+14) Güvenlik & Uyum
+
+HTTPS zorunlu.
+
+PCI: kart bilgilerini sunucuda tutma. Tokenizasyon kullan.
+
+CSRF koruması, input validation, rate limiting.
+
+Sensitive data (kart numarası, CVV) loglama kesinlikle yasak.
+
+Webhook secret doğrulama, idempotency key’ler.
+
+GDPR: kullanıcı verisi erişim/unutma istekleri; fatura ve sipariş geçmişi saklama politikaları.
+
+15) Test & monitoring checklist
+
+Unit tests: cart logic, coupon validation, shipping calc.
+
+Integration tests: payment provider sandbox ile success/fail/3DS.
+
+Concurrency tests: çoklu checkout aynı SKU ile.
+
+End-to-end test: guest + registered + apply coupon + change address flow.
+
+Monitoring: ödeme başarısızlığı oranı, abandoned cart oranı, stock depletion alerts.
+
+Alerts: webhook signature failures, high refund rate.
+
+16) Hızlı karar önerileri (tavsiyeler)
+
+İlk aşamada: stok decrement‘i checkout ödeme başarılı olduktan sonra yap (kolay) — büyüyünce rezervasyon modeli ekle.
+
+Ödeme sağlayıcı olarak Stripe/Adyen gibi tokenization ve güçlü webhook desteği olan bir servis tercih edin.
+
+Kargo için önce table-rate ile başlayıp, sonrasında carrier API entegrasyonu ekleyin.
+
+İstersen şimdi:
+
+Bu yapıyı Node.js + Express + PostgreSQL için çalışan bir örnek API iskeleti oluşturabilirim; veya
+
+Sadece sepet ve ödeme ile ilgili belirli bir endpoint’in tam kodunu (ör. POST /checkout) yazayım;
+
+Veya stok rezervasyon mantığını Redis + Postgres ile nasıl kuracağımızı somut kodla gösterayım.
+
+Hangi adımı hemen kodlayıp örnek görmek istersin?
+
+Şunu dedin:
+“Bu sistemi pseudocode olarak yaz. Donguler icin DONGU, kosullar icin ¨ 
+EGER- ISE kullan. Her adımı BASLA ile baslat, BITIR ile bitir. Tum 
+kontrol noktalarını belirt.”
+ChatGPT:
+8s boyunca düşündüm
+
+Harika — aşağıda istediğin biçimde (Türkçe, DONGU döngü anahtar kelimesi, EGER- ISE koşul yapısı, her adımı BASLA ile başlatıp BITIR ile bitiren, tüm kontrol noktalarını belirten kapsamlı pseudocode var. Adım adım, kontrol noktaları (KONTROL: ...) ve hata/geri alma akışları açıkça yazıldı.
+
+Not: -> işlem/atama gösterimi, // yorum içindir.
+
+BASLA Kullanıcı Girişi ve Session Yönetimi
+// Giriş veya guest session oluşturma
+BASLA GirişKontrol
+EGER user.credentials_varsa - ISE
+doğrula(user.credentials) -> EGER doğrulama başarılı - ISE
+create_session(user_id) -> session_id
+[KONTROL: session_id oluşturuldu mu?] -> EGER yoksa - ISE hata_logla; return HATA; BITIR
+return session_id
+ISE
+return HATA ("kimlik doğrulama başarısız")
+BITIR
+ISE
+// Guest checkout: session oluştur
+create_guest_session() -> session_id
+return session_id
+BITIR
+BITIR GirişKontrol
+BITIR Kullanıcı Girişi ve Session Yönetimi
+
+BASLA Sepete Ürün Ekleme (POST /cart/items)
+input: session_id, sku, qty
+BASLA YükleSepet
+load_or_create_cart(session_id) -> cart
+fetch_product_by_sku(sku) -> product
+[KONTROL: ürün mevcut mu?]
+EGER product yok - ISE
+return HATA ("ürün bulunamadı")
+ISE
+// Stok kontrolu: mevcut stok - rezerve >= talep
+available = product.stock_available - product.stock_reserved
+EGER qty <= 0 - ISE
+return HATA ("geçersiz adet")
+ISE
+EGER qty <= available - ISE
+// Rezervasyon politikası: rezervasyon varsa rezervasyon ekle
+EGER rezervasyon_yapılıyorsa - ISE
+begin_transaction
+UPDATE products SET stock_reserved = stock_reserved + qty WHERE sku = sku AND (stock_available - stock_reserved) >= qty
+EGER db_update_affect_rows == 0 - ISE
+rollback_transaction
+return HATA ("stok yarışması, adet yeterli değil")
+ISE
+commit_transaction
+BITIR
+cart.add_or_update_item(sku, qty, unit_price = product.price)
+cart.save()
+[KONTROL: cart item eklendi mi?] -> EGER değilse - ISE hata_logla; return HATA; BITIR
+return OK (cart)
+ISE
+// Rezervasyon yoksa sadece sepete ekle ama stok uyarısı göster
+cart.add_or_update_item(sku, qty, unit_price = product.price)
+cart.save()
+[KONTROL: sepete eklendi mi?] -> EGER değilse - ISE hata_logla; return HATA; BITIR
+EGER qty > available - ISE
+notify_user("Sipariş sırasında stok tükenebilir: kalan " + available)
+BITIR
+return OK (cart)
+BITIR
+BITIR
+BITIR
+BITIR YükleSepet
+BITIR Sepete Ürün Ekleme
+
+BASLA Sepeti Görüntüleme / Senkron Kontroller (GET /cart)
+input: session_id
+BASLA Görüntüle
+cart = load_cart(session_id)
+// Kontroller: her item için güncel fiyat ve stok
+DONGU item in cart.items
+product = fetch_product_by_sku(item.sku)
+EGER product yok - ISE
+item.mark_unavailable()
+ISE
+EGER product.price != item.unit_price - ISE
+item.flag_price_changed = true
+BITIR
+available = product.stock_available - product.stock_reserved
+EGER item.qty > available - ISE
+item.flag_stock_insufficient = true
+BITIR
+BITIR
+BITIR
+cart.save()
+return cart_with_flags
+BITIR Görüntüle
+BITIR Sepeti Görüntüleme / Senkron Kontroller
+
+BASLA Kupon Uygulama (POST /cart/apply-coupon)
+input: session_id, code
+BASLA KuponKontrol
+cart = load_cart(session_id)
+coupon = fetch_coupon(code)
+[KONTROL: kupon var mı?] -> EGER yok - ISE return HATA("Geçersiz kod")
+EGER coupon.expired OR coupon.disabled - ISE
+return HATA("Kupon geçersiz veya süresi dolmuş")
+BITIR
+EGER coupon.usage_limit_exceeded() - ISE
+return HATA("Kupon kullanım limiti aşıldı")
+BITIR
+// Ürün / kategori kısıtlamalarını kontrol et
+EGER NOT coupon.applies_to_cart(cart) - ISE
+return HATA("Kupon bu ürünlere uygulanamaz")
+BITIR
+// Minimum sipariş tutarı
+subtotal = cart.calculate_subtotal()
+EGER subtotal < coupon.min_order_amount - ISE
+return HATA("Minimum tutar sağlanmadı")
+BITIR
+// Kupon uygulama
+cart.apply_coupon_snapshot(coupon) // snapshot coupon rules into cart
+cart.recalculate_totals()
+cart.save()
+[KONTROL: kupon toplamı etkiledi mi?] -> EGER değilse - ISE log_warning
+return OK (cart)
+BITIR KuponKontrol
+BITIR Kupon Uygulama
+
+BASLA Kargo Hesaplama
+input: cart, shipping_address
+BASLA KargoHesapla
+items = cart.items
+total_weight = 0
+total_volume = 0
+DONGU item in items
+p = fetch_product_by_sku(item.sku)
+total_weight += p.weight * item.qty
+total_volume += p.volume * item.qty
+BITIR
+zone = lookup_zone(shipping_address.postal_code)
+EGER carrier_api_enabled - ISE
+rates = carrier_api.get_rates(zone, total_weight, total_volume, shipping_address)
+EGER rates.empty - ISE
+rates = lookup_table_rates(zone, total_weight) // fallback
+BITIR
+ISE
+rates = lookup_table_rates(zone, total_weight)
+BITIR
+return rates_sorted_by_price_and_speed
+BITIR KargoHesapla
+BITIR Kargo Hesaplama
+
+BASLA Checkout Başlatma (POST /checkout)
+input: session_id, billing_address, shipping_address, shipping_option, payment_method
+BASLA CheckoutAkisi
+// 1) Sepeti yükle ve final doğrulama
+cart = load_cart(session_id)
+[KONTROL: cart boş mu?] -> EGER boş - ISE return HATA("Sepet boş")
+cart.recalculate_totals()
+// 2) Tekrar kupon ve fiyat doğrulama
+EGER NOT cart.coupon_valid() - ISE
+return HATA("Kupon artık geçerli değil")
+BITIR
+// 3) Son stok rezervasyon / doğrulama ve sipariş taslağı oluşturma
+DONGU item in cart.items
+begin_transaction
+// Atomik kontrol: stoktan rezerve veya rezervasyon onayı
+product = fetch_product_for_update(item.sku) // row lock
+available = product.stock_available - product.stock_reserved
+EGER item.qty > available - ISE
+rollback_transaction
+// Serbest bırak ya da kullanıcıyı bilgilendir
+return HATA("Stok yetersiz: " + item.sku)
+ISE
+// Eğer rezervasyon yoksa burada rezerve edebiliriz veya sadece işaretleyip checkout sonrası düşür
+IF rezervasyon_modeli == "checkout_önce_rezervasyon" THEN
+product.stock_reserved += item.qty
+update_product(product)
+ENDIF
+commit_transaction
+BITIR
+BITIR
+BITIR
+// 4) Sipariş oluştur (draft)
+order = create_order_draft(snapshot_of_cart = cart, user_id = cart.user_id, status = "pending")
+[KONTROL: order oluşturuldu mu?] -> EGER değilse - ISE hata_logla; rollback_reservations(); return HATA; BITIR
+// 5) Ödeme sağlayıcısı için ödeme isteği oluştur (idempotency key dahil)
+idempotency_key = generate_idempotency_key(session_id, cart.id, order.id)
+payment_request = build_payment_request(amount = order.total_amount, currency = order.currency, metadata = {order_id: order.id})
+provider_response = payment_provider.create_payment_intent(payment_request, idempotency_key)
+EGER provider_response.error - ISE
+order.status = "payment_failed"
+order.save()
+rollback_reservations()
+return HATA("Ödeme başlatılamadı")
+BITIR
+// 6) Client-side adımı: client_secret/redirect bilgisi döndür
+return { order_id: order.id, payment_client_data: provider_response.client_data }
+BITIR CheckoutAkisi
+BITIR Checkout Başlatma
+
+BASLA Ödeme Tamamlama (Sunucu tarafı onay) (POST /payments/confirm)
+input: order_id, payment_token (provider tarafından oluşturulan)
+BASLA ÖdemeOnayi
+// Idempotent davran
+EGER payment_already_processed(order_id) - ISE
+return OK ("zaten işlendi")
+BITIR
+provider_result = payment_provider.confirm_payment(payment_token)
+EGER provider_result.status == "succeeded" - ISE
+begin_transaction
+order = fetch_order_for_update(order_id)
+// 1) Stokları kalıcı düş
+DONGU item in order.snapshot.items
+product = fetch_product_for_update(item.sku)
+EGER product.stock_available >= item.qty - ISE
+product.stock_available -= item.qty
+IF product.stock_reserved >= item.qty THEN
+product.stock_reserved -= item.qty
+ENDIF
+update_product(product)
+ISE
+rollback_transaction
+// Kritik: stok eksikliği — hata ve refund/compensation planı
+payment_provider.refund(provider_result.payment_id) // veya başka aksiyon
+order.status = "payment_failed_stock_issue"
+order.save()
+return HATA("Ödeme alındı fakat stok yetersiz — iade yapılıyor")
+BITIR
+BITIR
+// 2) Ödeme kaydı oluştur
+create_payment_record(order_id, provider_result)
+order.status = "paid"
+order.payment_confirmation = provider_result.id
+order.save()
+commit_transaction
+BITIR
+// 3) Sipariş tamamlandı: fatura, sevkiyat kuyruğu
+enqueue_fulfillment(order.id)
+notify_user_order_success(order.user_id, order.id)
+return OK (order)
+ISE
+// Ödeme başarısız veya beklemede
+order = fetch_order(order_id)
+order.status = "payment_failed"
+order.save()
+rollback_reservations()
+return HATA("Ödeme başarısız: " + provider_result.reason)
+BITIR
+BITIR ÖdemeOnayi
+BITIR Ödeme Tamamlama
+
+BASLA Webhook İşleme (Ödeme Sağlayıcıdan Asenkron)
+input: webhook_payload, signature
+BASLA Webhook
+EGER NOT verify_webhook_signature(webhook_payload, signature) - ISE
+log_warning("Webhook signature doğrulaması başarısız")
+return 401
+BITIR
+event = parse_webhook(webhook_payload)
+EGER event.type == "payment_intent.succeeded" - ISE
+order_id = event.metadata.order_id
+EGER payment_already_processed(order_id) - ISE
+return 200 // idempotent
+BITIR
+// Aynı sunucu tarafı confirmation akışını çağır (veya direkt işleme)
+call ÖdemeTamamlamaİşlevi(order_id, event.payment_token) // içsel fonksiyon
+return 200
+ISE EGER event.type == "payment_intent.payment_failed" - ISE
+order = fetch_order(event.metadata.order_id)
+order.status = "payment_failed"
+order.save()
+rollback_reservations_for_order(order.id)
+notify_user_payment_failed(order.user_id)
+return 200
+ISE
+// Diğer event tipleri: refund, chargeback
+handle_other_payment_events(event)
+return 200
+BITIR
+BITIR Webhook
+BITIR Webhook İşleme
+
+BASLA Rezervasyon TTL Cron / Temizleme
+// Periyodik olarak çalışan görev: süresi dolan rezervasyonları serbest bırak
+BASLA RezervasyonTemizle
+expired_reservations = fetch_reservations_older_than(now - RESERVATION_TTL)
+DONGU r in expired_reservations
+begin_transaction
+product = fetch_product_for_update(r.sku)
+IF product.stock_reserved >= r.qty THEN
+product.stock_reserved -= r.qty
+update_product(product)
+ELSE
+product.stock_reserved = max(0, product.stock_reserved - r.qty) // güvenlik
+update_product(product)
+ENDIF
+delete_reservation_record(r.id)
+commit_transaction
+BITIR
+BITIR
+log_info("Rezervasyon temizleme tamamlandı: count=" + expired_reservations.count)
+BITIR RezervasyonTemizle
+BITIR Rezervasyon TTL Cron / Temizleme
+
+BASLA İade ve Stok Geri Alma (Refund)
+input: order_id, items_to_refund (opsiyonel)
+BASLA IadeIslemi
+// Ödeme sağlayıcıdan refund isteği
+payment = fetch_payment_by_order(order_id)
+provider_refund = payment_provider.refund(payment.provider_payment_id, amount = items_to_refund.total_amount)
+EGER provider_refund.success - ISE
+begin_transaction
+order = fetch_order_for_update(order_id)
+order.status = "refunded" // veya kısmi iade mantığı
+DONGU item in items_to_refund
+product = fetch_product_for_update(item.sku)
+product.stock_available += item.qty
+update_product(product)
+BITIR
+create_refund_record(order_id, provider_refund)
+commit_transaction
+BITIR
+notify_user_refund_complete(order.user_id)
+return OK
+ISE
+log_error("Refund failed: " + provider_refund.reason)
+return HATA
+BITIR
+BITIR IadeIslemi
+BITIR İade ve Stok Geri Alma
+
+BASLA Hata Yönetimi ve Geri Alma (Genel Kurallar)
+BASLA HataKurallari
+// Tüm kritik işlemler transaction içinde yapılmalı
+// Her ödeme çağrısı idempotency key ile yapılmalı
+// Webhooklar imza ile doğrulanmalı
+// Kritik hatalarda: rezervasyonları geri ver, order'ı notarlas
+// Kullanıcıya açıklayıcı hata mesajı dön
+BITIR HataKurallari
+BITIR Hata Yönetimi ve Geri Alma
+
+BASLA İzleme ve Loglama (KONTROL NOKTALARI)
+BASLA Monitoring
+// Her aşağıdaki noktada log ve metrik tut:
+// - Kullanıcı giriş başarı/hata
+// - Sepete ekleme: sku, qty, kalan stok
+// - Rezervasyon başarısı / başarısızlığı
+// - Kupon uygulama / reddedilme sebebi
+// - Kargo hesaplama fallback durumları
+// - Ödeme başlatma, onay, reddedilme (+ provider reason)
+// - Webhook signature failures
+// - Rezervasyon TTL temizleme
+// - Refund ve chargeback oranları
+BITIR Monitoring
+BITIR İzleme ve Loglama
+
+İstediğin başka bir format (ör. sadece checkout sürecinin detaylı akışı, Node.js-benzeri pseudocode, veya her adımı daha kısa/uzun hâlde) ister misin? Hemen aynı biçimde genişletip verebilirim.
+
+Şunu dedin:
+“Pseudocode’u Graphviz DOT formatına cevir. rankdir=TB kullan. Karar 
+noktalarında EVET/HAYIR etiketlerini unutma.”
+ChatGPT:
+11s boyunca düşündüm
+digraph ECommerceFlow {
+  rankdir=TB;
+  node [fontname="Helvetica"];
+
+  // node styles
+  process [shape=rect];
+  decision [shape=diamond];
+  start [shape=oval, label="BASLA\nBaşlangıç"];
+  end [shape=oval, label="BITIR\nBitiş"];
+
+  // Nodes
+  n_login [shape=rect, label="BASLA\nKullanıcı Girişi\n/ Session Yönetimi\nBITIR"];
+  n_check_credentials [shape=diamond, label="Kredi- / Kimlik Bilgisi Var mı?"];
+  n_auth_success [shape=rect, label="Kullanıcı Doğrulandı\nsession_id oluştur"];
+  n_auth_fail [shape=rect, label="Doğrulama Başarısız\nHATA döndür"];
+  n_guest_session [shape=rect, label="Guest session oluştur"];
+
+  n_addcart [shape=rect, label="BASLA\nSepete Ürün Ekle\n(POST /cart/items)\nBITIR"];
+  n_fetch_product [shape=rect, label="Ürün Getir (sku)"];
+  n_product_exists [shape=diamond, label="Ürün mevcut mu?"];
+  n_qty_valid [shape=diamond, label="Adet (qty) > 0 mı?"];
+  n_check_stock [shape=diamond, label="qty <= available (stok)?"];
+  n_reserve_policy [shape=diamond, label="Rezervasyon Politikası Aktif mi?"];
+  n_db_reserve [shape=rect, label="DB: stock_reserved += qty\n(Transactional)"];
+  n_add_cart_item [shape=rect, label="Sepete item ekle/güncelle\ncart.save()"];
+  n_notify_low_stock [shape=rect, label="Kullanıcıya stok uyarısı göster"];
+  n_addcart_error [shape=rect, label="HATA: Ürün eklenemedi"];
+
+  n_viewcart [shape=rect, label="BASLA\nSepeti Görüntüle\n( GET /cart )\nBITIR"];
+  n_loop_items [shape=rect, label="DONGU: Her item için kontrol"];
+  n_price_changed [shape=rect, label="Fiyat değişti flag"];
+  n_stock_insufficient [shape=rect, label="Stok yetersiz flag"];
+
+  n_apply_coupon [shape=rect, label="BASLA\nKupon Uygula\n(POST /cart/apply-coupon)\nBITIR"];
+  n_fetch_coupon [shape=rect, label="Kupon Getir (code)"];
+  n_coupon_exists [shape=diamond, label="Kupon var mu?"];
+  n_coupon_valid [shape=diamond, label="Kupon aktif ve süresi uygun mu?"];
+  n_coupon_usage [shape=diamond, label="Kullanım limiti aşılmış mı?"];
+  n_coupon_applies [shape=diamond, label="Kupon sepete uygulanabilir mi?"];
+  n_coupon_min_amount [shape=diamond, label="Sep. subtotal >= min_tutar?"];
+  n_coupon_apply [shape=rect, label="Kuponu snapshot ile uygula\ncart.recalculate_totals()"];
+  n_coupon_error [shape=rect, label="HATA: Kupon reddedildi"];
+
+  n_ship_calc [shape=rect, label="BASLA\nKargo Hesaplama\nBITIR"];
+  n_calc_weight [shape=rect, label="Toplam ağırlık/hacim hesapla"];
+  n_zone_lookup [shape=rect, label="Bölge (zone) belirle"];
+  n_carrier_enabled [shape=diamond, label="Carrier API etkin mi?"];
+  n_get_rates [shape=rect, label="carrier_api.get_rates()\nveya table_rate fallback"];
+  n_return_rates [shape=rect, label="Seçenekleri döndür"];
+
+  n_checkout [shape=rect, label="BASLA\nCheckout Başlat\n(POST /checkout)\nBITIR"];
+  n_cart_load [shape=rect, label="Cart yükle ve totals hesapla"];
+  n_cart_empty [shape=diamond, label="Sepet boş mu?"];
+  n_coupon_still_valid [shape=diamond, label="Kupon hâlâ geçerli mi?"];
+  n_stock_loop [shape=rect, label="DONGU: Her item için stok doğrula (row-lock)"];
+  n_stock_check [shape=diamond, label="Her item için stok yeterli mi?"];
+  n_reserve_at_checkout [shape=rect, label="(Opsiyonel) checkout öncesi rezervasyon"];
+  n_create_order [shape=rect, label="Order draft oluştur\nstatus=pending"];
+  n_idempotency_key [shape=rect, label="idempotency_key üret"];
+  n_payment_intent [shape=rect, label="Ödeme isteği oluştur\n(provider create_payment_intent)"];
+  n_provider_error [shape=rect, label="HATA: Provider başlatma hatası\nrollback rezervasyon"];
+
+  n_payment_confirm [shape=rect, label="BASLA\nÖdeme Tamamlama\n(POST /payments/confirm)\nBITIR"];
+  n_payment_already [shape=diamond, label="Ödeme zaten işlendi mi?"];
+  n_provider_confirm [shape=rect, label="provider.confirm_payment(payment_token)"];
+  n_provider_succeeded [shape=diamond, label="provider sonucu = succeeded?"];
+  n_begin_tx [shape=rect, label="BEGIN TRANSACTION"];
+  n_decrement_stock [shape=rect, label="Ürün stoklarını kalıcı düş\n(product.stock_available -= qty)"];
+  n_stock_consistency [shape=diamond, label="Ürün stoğu yeterli mi? (final)"];
+  n_refund_on_issue [shape=rect, label="Refund & hata: stok eksikliği durumu"];
+  n_create_payment_record [shape=rect, label="Payment kaydı oluştur\norder.status = paid"];
+  n_enqueue_fulfillment [shape=rect, label="Fulfillment kuyruğuna ekle\nnotify user"];
+
+  n_payment_failed [shape=rect, label="Ödeme başarısız\norder.status = payment_failed\nrollback rezervasyon"];
+
+  n_webhook [shape=rect, label="BASLA\nWebhook İşleme\nBITIR"];
+  n_verify_signature [shape=diamond, label="Webhook imzası doğrulanıyor?"];
+  n_event_type [shape=diamond, label="Event tipi nedir?"];
+  n_event_payment_succeeded [shape=rect, label="payment_intent.succeeded -> ÖdemeTamamlama çağır"];
+  n_event_payment_failed [shape=rect, label="payment_intent.payment_failed -> rollback rezervasyon"];
+
+  n_reservation_cleanup [shape=rect, label="BASLA\nRezervasyon TTL Cron\nBITIR"];
+  n_fetch_expired [shape=rect, label="Süresi dolan rezervasyonları getir"];
+  n_loop_reservations [shape=rect, label="DONGU: Her rezervasyon için\nproduct.stock_reserved -= qty\nsil reservation record"];
+  n_cleanup_log [shape=rect, label="Temizlik logla"];
+
+  n_refund [shape=rect, label="BASLA\nİade (Refund)\nBITIR"];
+  n_provider_refund [shape=rect, label="provider.refund(...)"];
+  n_refund_success [shape=diamond, label="İade başarılı mı?"];
+  n_refund_apply [shape=rect, label="Stok geri al, refund kaydı oluştur\norder.status = refunded"];
+  n_refund_error [shape=rect, label="HATA: Refund başarısız"];
+
+  n_monitoring [shape=rect, label="BASLA\nİzleme & Loglama\n(KONTROL NOKTALARI)\nBITIR"];
+
+  // Edges - Start to Login
+  start -> n_login;
+  n_login -> n_check_credentials;
+  n_check_credentials -> n_auth_success [label="EVET"];
+  n_check_credentials -> n_guest_session [label="HAYIR"];
+  n_auth_success -> n_login [style=invis]; // keep cluster
+  n_auth_success -> n_addcart;
+  n_guest_session -> n_addcart;
+
+  // Add to cart flow
+  n_addcart -> n_fetch_product;
+  n_fetch_product -> n_product_exists;
+  n_product_exists -> n_addcart_error [label="HAYIR"];
+  n_product_exists -> n_qty_valid [label="EVET"];
+  n_qty_valid -> n_addcart_error [label="HAYIR"];
+  n_qty_valid -> n_check_stock [label="EVET"];
+  n_check_stock -> n_reserve_policy [label="EVET"];
+  n_check_stock -> n_notify_low_stock [label="HAYIR"];
+  n_reserve_policy -> n_db_reserve [label="EVET"];
+  n_db_reserve -> n_add_cart_item;
+  n_reserve_policy -> n_add_cart_item [label="HAYIR"];
+  n_add_cart_item -> n_viewcart;
+
+  // View cart sync checks
+  n_viewcart -> n_loop_items;
+  n_loop_items -> n_price_changed [label="EGER fiyat değişti"];
+  n_loop_items -> n_stock_insufficient [label="EGER stok yetersiz"];
+  n_loop_items -> n_apply_coupon;
+
+  // Coupon flow
+  n_apply_coupon -> n_fetch_coupon;
+  n_fetch_coupon -> n_coupon_exists;
+  n_coupon_exists -> n_coupon_error [label="HAYIR"];
+  n_coupon_exists -> n_coupon_valid [label="EVET"];
+  n_coupon_valid -> n_coupon_usage [label="EVET"];
+  n_coupon_valid -> n_coupon_error [label="HAYIR"];
+  n_coupon_usage -> n_coupon_error [label="HAYIR"];
+  n_coupon_usage -> n_coupon_applies [label="EVET"];
+  n_coupon_applies -> n_coupon_min_amount [label="EVET"];
+  n_coupon_applies -> n_coupon_error [label="HAYIR"];
+  n_coupon_min_amount -> n_coupon_apply [label="EVET"];
+  n_coupon_min_amount -> n_coupon_error [label="HAYIR"];
+  n_coupon_apply -> n_ship_calc;
+
+  // Shipping calc
+  n_ship_calc -> n_calc_weight;
+  n_calc_weight -> n_zone_lookup;
+  n_zone_lookup -> n_carrier_enabled;
+  n_carrier_enabled -> n_get_rates [label="EVET"];
+  n_carrier_enabled -> n_get_rates [label="HAYIR"];
+  n_get_rates -> n_return_rates;
+  n_return_rates -> n_checkout;
+
+  // Checkout
+  n_checkout -> n_cart_load;
+  n_cart_load -> n_cart_empty;
+  n_cart_empty -> n_checkout [label="EVET", style=dashed]; // loop back or error
+  n_cart_empty -> n_coupon_still_valid [label="HAYIR"];
+  n_coupon_still_valid -> n_stock_loop [label="EVET"];
+  n_coupon_still_valid -> n_checkout [label="HAYIR", labeldistance=2];
+  n_stock_loop -> n_stock_check;
+  n_stock_check -> n_checkout [label="HAYIR"];
+  n_stock_check -> n_reserve_at_checkout [label="EVET"];
+  n_reserve_at_checkout -> n_create_order;
+  n_create_order -> n_idempotency_key;
+  n_idempotency_key -> n_payment_intent;
+  n_payment_intent -> n_provider_error [label="HAYIR"];
+  n_payment_intent -> n_payment_confirm [label="EVET"];
+
+  // Payment confirm
+  n_payment_confirm -> n_payment_already;
+  n_payment_already -> n_provider_confirm [label="HAYIR"];
+  n_payment_already -> n_create_payment_record [label="EVET"];
+  n_provider_confirm -> n_provider_succeeded;
+  n_provider_succeeded -> n_begin_tx [label="EVET"];
+  n_provider_succeeded -> n_payment_failed [label="HAYIR"];
+  n_begin_tx -> n_decrement_stock;
+  n_decrement_stock -> n_stock_consistency;
+  n_stock_consistency -> n_refund_on_issue [label="HAYIR"];
+  n_stock_consistency -> n_create_payment_record [label="EVET"];
+  n_create_payment_record -> n_enqueue_fulfillment;
+  n_enqueue_fulfillment -> n_monitoring;
+
+  // Payment failed path
+  n_payment_failed -> n_monitoring;
+
+  // Webhook
+  n_monitoring -> n_webhook;
+  n_webhook -> n_verify_signature;
+  n_verify_signature -> n_event_type [label="EVET"];
+  n_verify_signature -> n_webhook [label="HAYIR", style=dashed]; // 401 and end
+  n_event_type -> n_event_payment_succeeded [label="payment_intent.succeeded"];
+  n_event_type -> n_event_payment_failed [label="payment_intent.payment_failed"];
+  n_event_payment_succeeded -> n_payment_confirm;
+  n_event_payment_failed -> n_payment_failed;
+
+  // Reservation cleanup
+  n_monitoring -> n_reservation_cleanup;
+  n_reservation_cleanup -> n_fetch_expired;
+  n_fetch_expired -> n_loop_reservations;
+  n_loop_reservations -> n_cleanup_log;
+  n_cleanup_log -> n_monitoring [style=dashed];
+
+  // Refund
+  n_monitoring -> n_refund;
+  n_refund -> n_provider_refund;
+  n_provider_refund -> n_refund_success [label="EVET"];
+  n_provider_refund -> n_refund_error [label="HAYIR"];
+  n_refund_success -> n_refund_apply;
+  n_refund_apply -> n_monitoring;
+
+  // End
+  n_monitoring -> end;
+}
