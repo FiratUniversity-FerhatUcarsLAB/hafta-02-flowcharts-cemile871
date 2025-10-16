@@ -1,0 +1,310 @@
+“Hastane randevu sistemi için algoritma: kimlik doğrulama, poliklinik 
+seçimi, doktor listesi görüntüleme, uygun saatleri gösterme, randevu 
+onaylama ve SMS gönderme. Pseudocode yaz.”
+ChatGPT:
+
+Tabii! İşte hastane randevu sistemi için istenen adımları içeren pseudocode örneği:
+
+🏥 Hastane Randevu Sistemi - Pseudocode
+BAŞLA
+
+  // 1. Kimlik Doğrulama
+  GİRİŞ: TCKimlikNo, Şifre
+  eğer KimlikBilgileriDoğruMu(TCKimlikNo, Şifre) ise
+      DEVAM ET
+  değilse
+      YAZDIR "Kimlik doğrulama başarısız. Lütfen tekrar deneyin."
+      BİTİR
+
+  // 2. Poliklinik Seçimi
+  POLIKLINIKLER ← PoliklinikListesiniGetir()
+  YAZDIR POLIKLINIKLER
+  GİRİŞ: SecilenPoliklinik
+
+  // 3. Doktor Listesi Görüntüleme
+  DOKTORLAR ← DoktorListesiniGetir(SecilenPoliklinik)
+  YAZDIR DOKTORLAR
+  GİRİŞ: SecilenDoktor
+
+  // 4. Uygun Saatleri Gösterme
+  SAATLER ← UygunSaatleriGetir(SecilenDoktor)
+  eğer SAATLER boş ise
+      YAZDIR "Uygun saat bulunamadı. Lütfen başka bir gün veya doktor seçin."
+      BİTİR
+  aksi halde
+      YAZDIR SAATLER
+      GİRİŞ: SecilenSaat
+
+  // 5. Randevu Onaylama
+  YAZDIR "Randevunuz: " + SecilenPoliklinik + " - " + SecilenDoktor + " - " + SecilenSaat
+  GİRİŞ: Onay (E/H)
+  eğer Onay == 'E' ise
+      RandevuKaydet(TCKimlikNo, SecilenPoliklinik, SecilenDoktor, SecilenSaat)
+      // 6. SMS Gönderme
+      TelefonNo ← TelefonNumarasiniGetir(TCKimlikNo)
+      SMSGonder(TelefonNo, "Randevunuz onaylandı: " + SecilenSaat)
+      YAZDIR "Randevu başarıyla oluşturuldu ve SMS gönderildi."
+  değilse
+      YAZDIR "Randevu iptal edildi."
+
+BİTİR
+
+
+İstersen bu pseudocode’u akış diyagramına çevirebilir veya Python / C# / Java gibi bir dile uygun biçimde gerçek koda dönüştürebilirim.
+Bunu ister misin?
+
+Şunu dedin:
+“Tahlil sonucu görüntüleme sistemi: kimlik doğrulama, tahlil varlığı 
+kontrolü, sonuç hazır mı kontrolü, görüntüleme veya bekleme mesajı, PDF 
+indirme. Pseudocode yaz.”
+ChatGPT:
+
+Elbette! İşte “Tahlil Sonucu Görüntüleme Sistemi” için adım adım hazırlanmış pseudocode örneği:
+
+🧪 Tahlil Sonucu Görüntüleme Sistemi - Pseudocode
+BAŞLA
+
+  // 1. Kimlik Doğrulama
+  GİRİŞ: TCKimlikNo, Şifre
+  eğer KimlikBilgileriDoğruMu(TCKimlikNo, Şifre) ise
+      DEVAM ET
+  değilse
+      YAZDIR "Kimlik doğrulama başarısız. Lütfen bilgilerinizi kontrol edin."
+      BİTİR
+
+  // 2. Tahlil Varlığı Kontrolü
+  TAHLILLER ← TahlilListesiniGetir(TCKimlikNo)
+  eğer TAHLILLER boş ise
+      YAZDIR "Henüz kayıtlı bir tahliliniz bulunmamaktadır."
+      BİTİR
+  aksi halde
+      YAZDIR "Mevcut tahliller:"
+      YAZDIR TAHLILLER
+      GİRİŞ: SecilenTahlil
+
+  // 3. Sonuç Hazır mı Kontrolü
+  eğer TahlilSonucuHazirMi(SecilenTahlil) ise
+      // 4. Sonuç Görüntüleme
+      SONUC ← TahlilSonucunuGetir(SecilenTahlil)
+      YAZDIR "Tahlil Sonucu:"
+      YAZDIR SONUC
+
+      // 5. PDF İndirme Seçeneği
+      GİRİŞ: IndirilsinMi (E/H)
+      eğer IndirilsinMi == 'E' ise
+          PDFIndir(SONUC)
+          YAZDIR "Tahlil sonucu PDF olarak indirildi."
+      değilse
+          YAZDIR "PDF indirme iptal edildi."
+  değilse
+      // 4. Bekleme Mesajı
+      YAZDIR "Tahlil sonucunuz henüz hazır değil. Lütfen daha sonra tekrar kontrol edin."
+
+BİTİR
+
+
+İstersen bu pseudocode’u görsel bir akış diyagramı olarak da çizebilir veya Python, C# ya da Java biçiminde gerçek koda çevirebilirim.
+Hangisini istersin?
+
+Şunu dedin:
+bu iki modülü birleştirir misin
+ChatGPT:
+
+Elbette!
+Aşağıda “Hastane Randevu ve Tahlil Sonucu Görüntüleme Sistemi” modüllerini tek bir birleşik sistem olarak gösteren, sade ve düzenli bir pseudocode bulabilirsin.
+İçinde iki ana modül var: Randevu İşlemleri ve Tahlil İşlemleri.
+
+🏥💉 Hastane Randevu ve Tahlil Sonucu Görüntüleme Sistemi - Pseudocode
+BAŞLA
+
+  // --- 1. KİMLİK DOĞRULAMA ---
+  GİRİŞ: TCKimlikNo, Şifre
+  eğer KimlikBilgileriDoğruMu(TCKimlikNo, Şifre) ise
+      YAZDIR "Giriş başarılı."
+  değilse
+      YAZDIR "Kimlik doğrulama başarısız. Lütfen tekrar deneyin."
+      BİTİR
+
+  // --- 2. ANA MENÜ ---
+  TEKRAR
+      YAZDIR "----- ANA MENÜ -----"
+      YAZDIR "1. Randevu İşlemleri"
+      YAZDIR "2. Tahlil Sonucu Görüntüleme"
+      YAZDIR "3. Çıkış"
+      GİRİŞ: Secim
+
+      EĞER Secim == 1 ise
+          // === RANDEVU MODÜLÜ ===
+
+          // Poliklinik Seçimi
+          POLIKLINIKLER ← PoliklinikListesiniGetir()
+          YAZDIR POLIKLINIKLER
+          GİRİŞ: SecilenPoliklinik
+
+          // Doktor Seçimi
+          DOKTORLAR ← DoktorListesiniGetir(SecilenPoliklinik)
+          YAZDIR DOKTORLAR
+          GİRİŞ: SecilenDoktor
+
+          // Uygun Saat Seçimi
+          SAATLER ← UygunSaatleriGetir(SecilenDoktor)
+          eğer SAATLER boş ise
+              YAZDIR "Uygun saat bulunamadı. Lütfen başka bir gün seçin."
+          aksi halde
+              YAZDIR SAATLER
+              GİRİŞ: SecilenSaat
+
+              // Randevu Onayı
+              YAZDIR "Randevunuz: " + SecilenPoliklinik + " - " + SecilenDoktor + " - " + SecilenSaat
+              GİRİŞ: Onay (E/H)
+              eğer Onay == 'E' ise
+                  RandevuKaydet(TCKimlikNo, SecilenPoliklinik, SecilenDoktor, SecilenSaat)
+                  TelefonNo ← TelefonNumarasiniGetir(TCKimlikNo)
+                  SMSGonder(TelefonNo, "Randevunuz onaylandı: " + SecilenSaat)
+                  YAZDIR "Randevu başarıyla oluşturuldu ve SMS gönderildi."
+              değilse
+                  YAZDIR "Randevu iptal edildi."
+
+      EĞER Secim == 2 ise
+          // === TAHLİL SONUCU MODÜLÜ ===
+
+          TAHLILLER ← TahlilListesiniGetir(TCKimlikNo)
+          eğer TAHLILLER boş ise
+              YAZDIR "Henüz kayıtlı bir tahliliniz bulunmamaktadır."
+          aksi halde
+              YAZDIR "Mevcut tahliller:"
+              YAZDIR TAHLILLER
+              GİRİŞ: SecilenTahlil
+
+              eğer TahlilSonucuHazirMi(SecilenTahlil) ise
+                  SONUC ← TahlilSonucunuGetir(SecilenTahlil)
+                  YAZDIR "Tahlil Sonucu:"
+                  YAZDIR SONUC
+
+                  GİRİŞ: IndirilsinMi (E/H)
+                  eğer IndirilsinMi == 'E' ise
+                      PDFIndir(SONUC)
+                      YAZDIR "Tahlil sonucu PDF olarak indirildi."
+                  değilse
+                      YAZDIR "PDF indirme iptal edildi."
+              değilse
+                  YAZDIR "Tahlil sonucunuz henüz hazır değil. Lütfen daha sonra tekrar kontrol edin."
+
+      EĞER Secim == 3 ise
+          YAZDIR "Sistemden çıkılıyor..."
+          ÇIK
+
+  // Menüden çıkış koşulu
+  TA Kİ Secim == 3 olana kadar
+
+BİTİR
+
+
+Bu birleşik yapı:
+
+Tek kimlik doğrulama ile giriş sağlar,
+
+Kullanıcıya menü üzerinden iki ana modül arasında seçim yapma imkânı sunar,
+
+Randevu ve tahlil işlemlerini ayrı ama entegre şekilde yürütür.
+
+İstersen bu yapıyı:
+
+🔹 Akış diyagramı haline getirebilirim,
+
+🔹 veya Python / C# / Java biçiminde gerçek koda dönüştürebilirim.
+
+Hangisini istersin?
+
+Şunu dedin:
+bu pseudocode graphviz dot formatına çevirir misin
+ChatGPT:
+
+Harika istek 👍
+Aşağıda, birleşik “Hastane Randevu ve Tahlil Sonucu Görüntüleme Sistemi” pseudocode’unun Graphviz DOT formatında akış diyagramı karşılığı yer alıyor.
+Bu diyagram, kimlik doğrulama → menü → iki modül (randevu / tahlil) → çıkış akışını gösterir.
+
+🩺 Graphviz DOT Dosyası
+digraph HastaneSistemi {
+
+    rankdir=TB;
+    node [shape=rectangle, style=rounded, fontname="Arial"];
+
+    Start [label="BAŞLA", shape=circle, style=filled, fillcolor=lightgrey];
+    Auth [label="Kimlik doğrulama:\nTCKimlikNo, Şifre kontrolü"];
+    AuthFail [label="Kimlik doğrulama başarısız\nSistem sonlanır", shape=rectangle, fillcolor="#ffdddd", style="filled,rounded"];
+    Menu [label="ANA MENÜ:\n1. Randevu İşlemleri\n2. Tahlil Görüntüleme\n3. Çıkış"];
+
+    Exit [label="Çıkış", shape=doublecircle, fillcolor="#ddddff", style="filled,rounded"];
+
+    // --- Randevu Modülü ---
+    Poliklinik [label="Poliklinik seçimi"];
+    Doktor [label="Doktor seçimi"];
+    Saat [label="Uygun saat seçimi"];
+    SaatYok [label="Uygun saat bulunamadı"];
+    Onay [label="Randevu onayı (E/H)"];
+    Kaydet [label="Randevu kaydedildi\nSMS gönderildi"];
+    Iptal [label="Randevu iptal edildi"];
+
+    // --- Tahlil Modülü ---
+    TahlilListe [label="Tahlil listesi kontrolü"];
+    TahlilYok [label="Kayıtlı tahlil yok"];
+    SonucHazir [label="Tahlil sonucu hazır mı?"];
+    SonucGoster [label="Sonuç görüntüleme"];
+    Bekle [label="Sonuç henüz hazır değil"];
+    PDFsec [label="PDF indirilsin mi? (E/H)"];
+    PDFindir [label="PDF indirildi"];
+    PDFiptal [label="PDF indirme iptal edildi"];
+
+    // --- Akışlar ---
+    Start -> Auth;
+    Auth -> AuthFail [label="Hatalı"];
+    Auth -> Menu [label="Doğru"];
+
+    // Menüden seçimler
+    Menu -> Poliklinik [label="1: Randevu İşlemleri"];
+    Menu -> TahlilListe [label="2: Tahlil Görüntüleme"];
+    Menu -> Exit [label="3: Çıkış"];
+
+    // --- Randevu akışı ---
+    Poliklinik -> Doktor;
+    Doktor -> Saat;
+    Saat -> SaatYok [label="Boş"];
+    Saat -> Onay [label="Seçildi"];
+    Onay -> Kaydet [label="Evet"];
+    Onay -> Iptal [label="Hayır"];
+    SaatYok -> Menu;
+    Kaydet -> Menu;
+    Iptal -> Menu;
+
+    // --- Tahlil akışı ---
+    TahlilListe -> TahlilYok [label="Boş"];
+    TahlilListe -> SonucHazir [label="Var"];
+    TahlilYok -> Menu;
+    SonucHazir -> Bekle [label="Hayır"];
+    SonucHazir -> SonucGoster [label="Evet"];
+    SonucGoster -> PDFsec;
+    PDFsec -> PDFindir [label="Evet"];
+    PDFsec -> PDFiptal [label="Hayır"];
+    PDFindir -> Menu;
+    PDFiptal -> Menu;
+    Bekle -> Menu;
+
+    // --- Genel akış ---
+    Menu -> Exit [label="3: Çıkış seçildi"];
+
+}
+
+💡 Kullanım:
+
+Bu kodu bir dosyaya kaydet: hastane_sistemi.dot
+
+Terminalde veya komut satırında şu komutu çalıştır:
+
+dot -Tpng hastane_sistemi.dot -o hastane_sistemi.png
+
+
+Çıktı olarak akış diyagramı görüntüsünü elde edersin.
+
+İstersen bu diyagramı benim senin için görsel olarak oluşturup gösterebilirim (Graphviz’le render edilmiş halde).
+İster misin?
