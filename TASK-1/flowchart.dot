@@ -1,0 +1,63 @@
+digraph ATM_Para_Cekme {
+    rankdir=TB;
+    node [fontname="Arial"];
+
+    // Başla ve Bitir
+    start [label="BAŞLA", shape=ellipse];
+    end [label="SON\nKartınızı almayı unutmayın.", shape=ellipse];
+
+    // PIN doğrulama
+    input_pin [label="Lütfen PIN giriniz", shape=parallelogram];
+    check_pin [label="PIN doğru mu?", shape=diamond];
+    wrong_pin [label="PIN_HAK - 1", shape=box];
+    pin_attempts [label="PIN_HAK > 0?", shape=diamond];
+    pin_blocked [label="Kart bloke edildi", shape=parallelogram];
+
+    // Para çekme döngüsü
+    input_amount [label="Tutar gir (20 TL katı)", shape=parallelogram];
+    check_multiple [label="Tutar 20'nin katı mı?", shape=diamond];
+    not_multiple [label="Hata: 20 TL katı olmalı", shape=parallelogram];
+
+    check_balance [label="Tutar > Bakiye?", shape=diamond];
+    insufficient_balance [label="Yetersiz bakiye", shape=parallelogram];
+
+    check_limit [label="(Kullanılan + Tutar) > Günlük Limit?", shape=diamond];
+    limit_exceeded [label="Limit aşıldı", shape=parallelogram];
+
+    update_balance [label="Bakiye -= Tutar\nKullanılan += Tutar", shape=box];
+    show_success [label="İşlem başarılı\nYeni bakiye göster", shape=parallelogram];
+
+    ask_repeat [label="Başka işlem? (E/H)", shape=parallelogram];
+    repeat_check [label="Cevap = H?", shape=diamond];
+
+    // Bağlantılar
+    start -> input_pin;
+    input_pin -> check_pin;
+
+    check_pin -> input_amount [label="Evet"];
+    check_pin -> wrong_pin [label="Hayır"];
+    wrong_pin -> pin_attempts;
+    pin_attempts -> input_pin [label="Evet"];
+    pin_attempts -> pin_blocked [label="Hayır"];
+    pin_blocked -> end;
+
+    // Para çekme süreci
+    input_amount -> check_multiple;
+    check_multiple -> check_balance [label="Evet"];
+    check_multiple -> not_multiple [label="Hayır"];
+    not_multiple -> input_amount;
+
+    check_balance -> check_limit [label="Hayır"];
+    check_balance -> insufficient_balance [label="Evet"];
+    insufficient_balance -> input_amount;
+
+    check_limit -> update_balance [label="Hayır"];
+    check_limit -> limit_exceeded [label="Evet"];
+    limit_exceeded -> input_amount;
+
+    update_balance -> show_success;
+    show_success -> ask_repeat;
+    ask_repeat -> repeat_check;
+    repeat_check -> input_amount [label="Hayır"];
+    repeat_check -> end [label="Evet"];
+}
