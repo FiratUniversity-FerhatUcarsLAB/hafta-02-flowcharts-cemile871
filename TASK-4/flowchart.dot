@@ -1,0 +1,63 @@
+digraph DersKayitSistemi {
+    rankdir=TB;
+    node [shape=box, style=rounded, fontname="Arial"];
+    
+    Start [label="BAŞLA", shape=oval];
+    Login [label="Giriş Yap (kullanıcı adı, şifre)", shape=parallelogram];
+    Auth [label="Kimlik doğrulama doğru mu?", shape=diamond];
+    Fail [label="Hatalı giriş - BİTİR", shape=oval];
+    
+    DersList [label="Ders listesini getir", shape=box];
+    ShowList [label="Dersleri görüntüle", shape=box];
+    SelectLoop [label="Ders seçimi döngüsü", shape=box];
+    DersGir [label="Ders kodu gir", shape=parallelogram];
+    EndSelect [label="BİTİR girildi mi?", shape=diamond];
+    ExitSelect [label="Seçim tamamlandı", shape=oval];
+    
+    Kontenjan [label="Kontenjan uygun mu?", shape=diamond];
+    Onkosul [label="Ön koşul tamam mı?", shape=diamond];
+    Zaman [label="Zaman çakışması var mı?", shape=diamond];
+    Kredi [label="Kredi limiti aşıldı mı?", shape=diamond];
+    
+    AddCourse [label="Ders ekle\n(kontenjan azalt, kredi topla)", shape=box];
+    KontenjanFull [label="Kontenjan dolu - Ders eklenmedi", shape=box];
+    OnkosulFail [label="Ön koşul eksik - Ders eklenmedi", shape=box];
+    ZamanFail [label="Zaman çakışması - Ders eklenmedi", shape=box];
+    KrediFail [label="Kredi limiti aşıldı - Ders eklenmedi", shape=box];
+    
+    Danisman [label="Danışman onayı", shape=diamond];
+    OnayOK [label="Ders kaydı başarılı", shape=oval];
+    OnayFail [label="Onay reddedildi - Düzenleme yap", shape=box];
+
+    # --- Akış bağlantıları ---
+    Start -> Login -> Auth;
+    Auth -> DersList [label="Evet"];
+    Auth -> Fail [label="Hayır"];
+    
+    DersList -> ShowList -> SelectLoop -> DersGir -> EndSelect;
+    EndSelect -> ExitSelect [label="Evet"];
+    EndSelect -> Kontenjan [label="Hayır"];
+
+    # Kontroller zinciri
+    Kontenjan -> Onkosul [label="Evet"];
+    Kontenjan -> KontenjanFull [label="Hayır"];
+    
+    Onkosul -> Zaman [label="Evet"];
+    Onkosul -> OnkosulFail [label="Hayır"];
+    
+    Zaman -> Kredi [label="Hayır"];
+    Zaman -> ZamanFail [label="Evet"];
+    
+    Kredi -> AddCourse [label="Hayır"];
+    Kredi -> KrediFail [label="Evet"];
+    
+    AddCourse -> DersGir;
+    KontenjanFull -> DersGir;
+    OnkosulFail -> DersGir;
+    ZamanFail -> DersGir;
+    KrediFail -> DersGir;
+
+    ExitSelect -> Danisman;
+    Danisman -> OnayOK [label="Evet"];
+    Danisman -> OnayFail [label="Hayır"];
+}
