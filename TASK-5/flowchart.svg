@@ -1,0 +1,125 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="485pt" height="587pt" viewBox="0.00 0.00 485.00 587.00">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 582.6)">
+<title>AkilliEvGuvenlikSistemi</title>
+<polygon fill="white" stroke="none" points="-4,4 -4,-582.6 481.47,-582.6 481.47,4 -4,4"/>
+<!-- Start -->
+<g id="node1" class="node">
+<title>Start</title>
+<path fill="none" stroke="black" d="M265.27,-578.6C265.27,-578.6 229.69,-578.6 229.69,-578.6 223.69,-578.6 217.69,-572.6 217.69,-566.6 217.69,-566.6 217.69,-554.6 217.69,-554.6 217.69,-548.6 223.69,-542.6 229.69,-542.6 229.69,-542.6 265.27,-542.6 265.27,-542.6 271.27,-542.6 277.27,-548.6 277.27,-554.6 277.27,-554.6 277.27,-566.6 277.27,-566.6 277.27,-572.6 271.27,-578.6 265.27,-578.6"/>
+<text xml:space="preserve" text-anchor="middle" x="247.48" y="-556.4" font-family="Arial" font-size="14.00">BAŞLA</text>
+</g>
+<!-- SensörOkuma -->
+<g id="node2" class="node">
+<title>SensörOkuma</title>
+<path fill="none" stroke="black" d="M289.77,-505.6C289.77,-505.6 205.18,-505.6 205.18,-505.6 199.18,-505.6 193.18,-499.6 193.18,-493.6 193.18,-493.6 193.18,-481.6 193.18,-481.6 193.18,-475.6 199.18,-469.6 205.18,-469.6 205.18,-469.6 289.77,-469.6 289.77,-469.6 295.77,-469.6 301.77,-475.6 301.77,-481.6 301.77,-481.6 301.77,-493.6 301.77,-493.6 301.77,-499.6 295.77,-505.6 289.77,-505.6"/>
+<text xml:space="preserve" text-anchor="middle" x="247.48" y="-483.4" font-family="Arial" font-size="14.00">Sensörleri Oku</text>
+</g>
+<!-- Start&#45;&gt;SensörOkuma -->
+<g id="edge1" class="edge">
+<title>Start-&gt;SensörOkuma</title>
+<path fill="none" stroke="black" d="M247.48,-542.41C247.48,-534.83 247.48,-525.7 247.48,-517.14"/>
+<polygon fill="black" stroke="black" points="250.98,-517.14 247.48,-507.14 243.98,-517.14 250.98,-517.14"/>
+</g>
+<!-- TehditAlgılama -->
+<g id="node3" class="node">
+<title>TehditAlgılama</title>
+<path fill="none" stroke="black" d="M245.33,-432.6C245.33,-432.6 171.62,-432.6 171.62,-432.6 165.62,-432.6 159.62,-426.6 159.62,-420.6 159.62,-420.6 159.62,-408.6 159.62,-408.6 159.62,-402.6 165.62,-396.6 171.62,-396.6 171.62,-396.6 245.33,-396.6 245.33,-396.6 251.33,-396.6 257.33,-402.6 257.33,-408.6 257.33,-408.6 257.33,-420.6 257.33,-420.6 257.33,-426.6 251.33,-432.6 245.33,-432.6"/>
+<text xml:space="preserve" text-anchor="middle" x="208.48" y="-410.4" font-family="Arial" font-size="14.00">Tehdit Algıla</text>
+</g>
+<!-- SensörOkuma&#45;&gt;TehditAlgılama -->
+<g id="edge2" class="edge">
+<title>SensörOkuma-&gt;TehditAlgılama</title>
+<path fill="none" stroke="black" d="M238.03,-469.41C233.63,-461.39 228.28,-451.65 223.34,-442.67"/>
+<polygon fill="black" stroke="black" points="226.44,-441.04 218.56,-433.96 220.3,-444.41 226.44,-441.04"/>
+</g>
+<!-- AlarmVer -->
+<g id="node4" class="node">
+<title>AlarmVer</title>
+<path fill="none" stroke="black" d="M229.59,-359.6C229.59,-359.6 175.36,-359.6 175.36,-359.6 169.36,-359.6 163.36,-353.6 163.36,-347.6 163.36,-347.6 163.36,-335.6 163.36,-335.6 163.36,-329.6 169.36,-323.6 175.36,-323.6 175.36,-323.6 229.59,-323.6 229.59,-323.6 235.59,-323.6 241.59,-329.6 241.59,-335.6 241.59,-335.6 241.59,-347.6 241.59,-347.6 241.59,-353.6 235.59,-359.6 229.59,-359.6"/>
+<text xml:space="preserve" text-anchor="middle" x="202.48" y="-337.4" font-family="Arial" font-size="14.00">Alarm Ver</text>
+</g>
+<!-- TehditAlgılama&#45;&gt;AlarmVer -->
+<g id="edge3" class="edge">
+<title>TehditAlgılama-&gt;AlarmVer</title>
+<path fill="none" stroke="black" d="M207.02,-396.41C206.37,-388.74 205.59,-379.49 204.86,-370.84"/>
+<polygon fill="black" stroke="black" points="208.37,-370.81 204.04,-361.14 201.4,-371.4 208.37,-370.81"/>
+</g>
+<!-- AlarmKontrol -->
+<g id="node5" class="node">
+<title>AlarmKontrol</title>
+<path fill="none" stroke="black" d="M238.43,-286.6C238.43,-286.6 144.52,-286.6 144.52,-286.6 138.52,-286.6 132.52,-280.6 132.52,-274.6 132.52,-274.6 132.52,-262.6 132.52,-262.6 132.52,-256.6 138.52,-250.6 144.52,-250.6 144.52,-250.6 238.43,-250.6 238.43,-250.6 244.43,-250.6 250.43,-256.6 250.43,-262.6 250.43,-262.6 250.43,-274.6 250.43,-274.6 250.43,-280.6 244.43,-286.6 238.43,-286.6"/>
+<text xml:space="preserve" text-anchor="middle" x="191.48" y="-264.4" font-family="Arial" font-size="14.00">Alarm açık mı?</text>
+</g>
+<!-- AlarmVer&#45;&gt;AlarmKontrol -->
+<g id="edge4" class="edge">
+<title>AlarmVer-&gt;AlarmKontrol</title>
+<path fill="none" stroke="black" d="M199.81,-323.41C198.62,-315.74 197.19,-306.49 195.85,-297.84"/>
+<polygon fill="black" stroke="black" points="199.34,-297.47 194.35,-288.12 192.42,-298.54 199.34,-297.47"/>
+</g>
+<!-- AlarmSıfırla -->
+<g id="node6" class="node">
+<title>AlarmSıfırla</title>
+<path fill="none" stroke="black" d="M196.95,-197.8C196.95,-197.8 12,-197.8 12,-197.8 6,-197.8 0,-191.8 0,-185.8 0,-185.8 0,-173.8 0,-173.8 0,-167.8 6,-161.8 12,-161.8 12,-161.8 196.95,-161.8 196.95,-161.8 202.95,-161.8 208.95,-167.8 208.95,-173.8 208.95,-173.8 208.95,-185.8 208.95,-185.8 208.95,-191.8 202.95,-197.8 196.95,-197.8"/>
+<text xml:space="preserve" text-anchor="middle" x="104.48" y="-175.6" font-family="Arial" font-size="14.00">Kullanıcı alarm sıfırladı mı?</text>
+</g>
+<!-- AlarmKontrol&#45;&gt;AlarmSıfırla -->
+<g id="edge5" class="edge">
+<title>AlarmKontrol-&gt;AlarmSıfırla</title>
+<path fill="none" stroke="black" d="M174.29,-250.45C161.62,-237.81 144.18,-220.42 129.91,-206.17"/>
+<polygon fill="black" stroke="black" points="132.55,-203.86 123,-199.28 127.6,-208.82 132.55,-203.86"/>
+<text xml:space="preserve" text-anchor="middle" x="168.6" y="-220" font-family="Times,serif" font-size="14.00">Evet</text>
+</g>
+<!-- Bekle -->
+<g id="node8" class="node">
+<title>Bekle</title>
+<path fill="none" stroke="black" d="M250.67,-36C250.67,-36 158.29,-36 158.29,-36 152.29,-36 146.29,-30 146.29,-24 146.29,-24 146.29,-12 146.29,-12 146.29,-6 152.29,0 158.29,0 158.29,0 250.67,0 250.67,0 256.67,0 262.67,-6 262.67,-12 262.67,-12 262.67,-24 262.67,-24 262.67,-30 256.67,-36 250.67,-36"/>
+<text xml:space="preserve" text-anchor="middle" x="204.48" y="-13.8" font-family="Arial" font-size="14.00">Bekle (1 saniye)</text>
+</g>
+<!-- AlarmKontrol&#45;&gt;Bekle -->
+<g id="edge6" class="edge">
+<title>AlarmKontrol-&gt;Bekle</title>
+<path fill="none" stroke="black" d="M199.9,-250.3C206.14,-236.47 214.13,-216.38 217.48,-197.8 226.95,-145.24 217.88,-82.8 210.87,-47.35"/>
+<polygon fill="black" stroke="black" points="214.37,-46.98 208.91,-37.89 207.51,-48.4 214.37,-46.98"/>
+<text xml:space="preserve" text-anchor="middle" x="239.02" y="-131.2" font-family="Times,serif" font-size="14.00">Hayır</text>
+</g>
+<!-- Sıfırlaİşlem -->
+<g id="node7" class="node">
+<title>Sıfırlaİşlem</title>
+<path fill="none" stroke="black" d="M125.76,-109C125.76,-109 41.19,-109 41.19,-109 35.19,-109 29.19,-103 29.19,-97 29.19,-97 29.19,-85 29.19,-85 29.19,-79 35.19,-73 41.19,-73 41.19,-73 125.76,-73 125.76,-73 131.76,-73 137.76,-79 137.76,-85 137.76,-85 137.76,-97 137.76,-97 137.76,-103 131.76,-109 125.76,-109"/>
+<text xml:space="preserve" text-anchor="middle" x="83.48" y="-86.8" font-family="Arial" font-size="14.00">Alarmı Sıfırla</text>
+</g>
+<!-- AlarmSıfırla&#45;&gt;Sıfırlaİşlem -->
+<g id="edge7" class="edge">
+<title>AlarmSıfırla-&gt;Sıfırlaİşlem</title>
+<path fill="none" stroke="black" d="M100.33,-161.65C97.47,-149.84 93.61,-133.87 90.3,-120.21"/>
+<polygon fill="black" stroke="black" points="93.8,-119.78 88.04,-110.88 86.99,-121.42 93.8,-119.78"/>
+<text xml:space="preserve" text-anchor="middle" x="108.68" y="-131.2" font-family="Times,serif" font-size="14.00">Evet</text>
+</g>
+<!-- AlarmSıfırla&#45;&gt;Bekle -->
+<g id="edge8" class="edge">
+<title>AlarmSıfırla-&gt;Bekle</title>
+<path fill="none" stroke="black" d="M115.37,-161.39C132.8,-133.54 167.09,-78.73 187.68,-45.84"/>
+<polygon fill="black" stroke="black" points="190.46,-48 192.79,-37.67 184.52,-44.29 190.46,-48"/>
+<text xml:space="preserve" text-anchor="middle" x="187.57" y="-86.8" font-family="Times,serif" font-size="14.00">Hayır</text>
+</g>
+<!-- Sıfırlaİşlem&#45;&gt;Bekle -->
+<g id="edge9" class="edge">
+<title>Sıfırlaİşlem-&gt;Bekle</title>
+<path fill="none" stroke="black" d="M113.08,-72.63C128.75,-63.43 148.21,-52.02 165.13,-42.08"/>
+<polygon fill="black" stroke="black" points="166.6,-45.28 173.46,-37.2 163.06,-39.24 166.6,-45.28"/>
+</g>
+<!-- Bekle&#45;&gt;SensörOkuma -->
+<g id="edge10" class="edge">
+<title>Bekle-&gt;SensörOkuma</title>
+<path fill="none" stroke="blue" d="M245.48,-36.42C265.98,-48.15 286.48,-65.9 286.48,-90 286.48,-415.6 286.48,-415.6 286.48,-415.6 286.48,-431.74 278.64,-447.67 269.99,-460.35"/>
+<polygon fill="blue" stroke="blue" points="267.37,-458.01 264.24,-468.13 273,-462.17 267.37,-458.01"/>
+<text xml:space="preserve" text-anchor="middle" x="305.53" y="-264.4" font-family="Times,serif" font-size="14.00">sürekli</text>
+</g>
+<!-- End -->
+<g id="node9" class="node">
+<title>End</title>
+<ellipse fill="none" stroke="black" stroke-dasharray="5,2" cx="386.48" cy="-560.6" rx="91" ry="18"/>
+<text xml:space="preserve" text-anchor="middle" x="386.48" y="-556.4" font-family="Arial" font-size="14.00">BİTİR (opsiyonel)</text>
+</g>
+</g>
+</svg>
