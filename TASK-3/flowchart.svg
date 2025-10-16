@@ -1,0 +1,311 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1034pt" height="793pt" viewBox="0.00 0.00 1034.00 793.00">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 789.05)">
+<title>HastaneSistemi</title>
+<polygon fill="white" stroke="none" points="-4,4 -4,-789.05 1029.56,-789.05 1029.56,4 -4,4"/>
+<!-- Start -->
+<g id="node1" class="node">
+<title>Start</title>
+<ellipse fill="lightgrey" stroke="black" cx="417.59" cy="-743.95" rx="41.1" ry="41.1"/>
+<text xml:space="preserve" text-anchor="middle" x="417.59" y="-739.75" font-family="Arial" font-size="14.00">BAŞLA</text>
+</g>
+<!-- Auth -->
+<g id="node2" class="node">
+<title>Auth</title>
+<path fill="none" stroke="black" d="M494.88,-665.86C494.88,-665.86 340.3,-665.86 340.3,-665.86 334.3,-665.86 328.3,-659.86 328.3,-653.86 328.3,-653.86 328.3,-636.26 328.3,-636.26 328.3,-630.26 334.3,-624.26 340.3,-624.26 340.3,-624.26 494.88,-624.26 494.88,-624.26 500.88,-624.26 506.88,-630.26 506.88,-636.26 506.88,-636.26 506.88,-653.86 506.88,-653.86 506.88,-659.86 500.88,-665.86 494.88,-665.86"/>
+<text xml:space="preserve" text-anchor="middle" x="417.59" y="-649.26" font-family="Arial" font-size="14.00">Kimlik doğrulama:</text>
+<text xml:space="preserve" text-anchor="middle" x="417.59" y="-632.46" font-family="Arial" font-size="14.00">TCKimlikNo, Şifre kontrolü</text>
+</g>
+<!-- Start&#45;&gt;Auth -->
+<g id="edge1" class="edge">
+<title>Start-&gt;Auth</title>
+<path fill="none" stroke="black" d="M417.59,-702.42C417.59,-694.16 417.59,-685.58 417.59,-677.68"/>
+<polygon fill="black" stroke="black" points="421.09,-677.85 417.59,-667.85 414.09,-677.85 421.09,-677.85"/>
+</g>
+<!-- AuthFail -->
+<g id="node3" class="node">
+<title>AuthFail</title>
+<path fill="#ffdddd" stroke="black" d="M471.9,-554.66C471.9,-554.66 303.29,-554.66 303.29,-554.66 297.29,-554.66 291.29,-548.66 291.29,-542.66 291.29,-542.66 291.29,-525.06 291.29,-525.06 291.29,-519.06 297.29,-513.06 303.29,-513.06 303.29,-513.06 471.9,-513.06 471.9,-513.06 477.9,-513.06 483.9,-519.06 483.9,-525.06 483.9,-525.06 483.9,-542.66 483.9,-542.66 483.9,-548.66 477.9,-554.66 471.9,-554.66"/>
+<text xml:space="preserve" text-anchor="middle" x="387.59" y="-538.06" font-family="Arial" font-size="14.00">Kimlik doğrulama başarısız</text>
+<text xml:space="preserve" text-anchor="middle" x="387.59" y="-521.26" font-family="Arial" font-size="14.00">Sistem sonlanır</text>
+</g>
+<!-- Auth&#45;&gt;AuthFail -->
+<g id="edge2" class="edge">
+<title>Auth-&gt;AuthFail</title>
+<path fill="none" stroke="black" d="M412.02,-623.77C407.56,-607.53 401.22,-584.47 396.12,-565.91"/>
+<polygon fill="black" stroke="black" points="399.56,-565.21 393.54,-556.49 392.81,-567.06 399.56,-565.21"/>
+<text xml:space="preserve" text-anchor="middle" x="425.69" y="-593.66" font-family="Times,serif" font-size="14.00">Hatalı</text>
+</g>
+<!-- Menu -->
+<g id="node4" class="node">
+<title>Menu</title>
+<path fill="none" stroke="black" d="M639.5,-571.46C639.5,-571.46 513.68,-571.46 513.68,-571.46 507.68,-571.46 501.68,-565.46 501.68,-559.46 501.68,-559.46 501.68,-508.26 501.68,-508.26 501.68,-502.26 507.68,-496.26 513.68,-496.26 513.68,-496.26 639.5,-496.26 639.5,-496.26 645.5,-496.26 651.5,-502.26 651.5,-508.26 651.5,-508.26 651.5,-559.46 651.5,-559.46 651.5,-565.46 645.5,-571.46 639.5,-571.46"/>
+<text xml:space="preserve" text-anchor="middle" x="576.59" y="-554.86" font-family="Arial" font-size="14.00">ANA MENÜ:</text>
+<text xml:space="preserve" text-anchor="middle" x="576.59" y="-538.06" font-family="Arial" font-size="14.00">1. Randevu İşlemleri</text>
+<text xml:space="preserve" text-anchor="middle" x="576.59" y="-521.26" font-family="Arial" font-size="14.00">2. Tahlil Görüntüleme</text>
+<text xml:space="preserve" text-anchor="middle" x="576.59" y="-504.46" font-family="Arial" font-size="14.00">3. Çıkış</text>
+</g>
+<!-- Auth&#45;&gt;Menu -->
+<g id="edge3" class="edge">
+<title>Auth-&gt;Menu</title>
+<path fill="none" stroke="black" d="M447.13,-623.77C465.75,-610.98 490.54,-593.96 513.43,-578.24"/>
+<polygon fill="black" stroke="black" points="515.26,-581.23 521.52,-572.68 511.29,-575.46 515.26,-581.23"/>
+<text xml:space="preserve" text-anchor="middle" x="514.98" y="-593.66" font-family="Times,serif" font-size="14.00">Doğru</text>
+</g>
+<!-- Exit -->
+<g id="node5" class="node">
+<title>Exit</title>
+<ellipse fill="#ddddff" stroke="black" cx="61.59" cy="-402.13" rx="37.33" ry="37.33"/>
+<ellipse fill="none" stroke="black" cx="61.59" cy="-402.13" rx="41.33" ry="41.33"/>
+<text xml:space="preserve" text-anchor="middle" x="61.59" y="-397.93" font-family="Arial" font-size="14.00">Çıkış</text>
+</g>
+<!-- Menu&#45;&gt;Exit -->
+<g id="edge6" class="edge">
+<title>Menu-&gt;Exit</title>
+<path fill="none" stroke="black" d="M501.48,-498.6C498.5,-497.73 495.53,-496.95 492.59,-496.26 412.13,-477.45 194.71,-515.99 121.2,-478.26 107.75,-471.35 96.33,-459.88 87.21,-447.97"/>
+<polygon fill="black" stroke="black" points="90.22,-446.16 81.56,-440.06 84.53,-450.23 90.22,-446.16"/>
+<text xml:space="preserve" text-anchor="middle" x="145.9" y="-465.66" font-family="Times,serif" font-size="14.00">3: Çıkış</text>
+</g>
+<!-- Menu&#45;&gt;Exit -->
+<g id="edge27" class="edge">
+<title>Menu-&gt;Exit</title>
+<path fill="none" stroke="black" d="M501.49,-498.56C498.51,-497.7 495.54,-496.93 492.59,-496.26 466.24,-490.25 25.13,-497.72 6.37,-478.26 -6.83,-464.56 3.73,-447.61 19.01,-433.27"/>
+<polygon fill="black" stroke="black" points="20.93,-436.24 26.19,-427.04 16.34,-430.95 20.93,-436.24"/>
+<text xml:space="preserve" text-anchor="middle" x="51.48" y="-465.66" font-family="Times,serif" font-size="14.00">3: Çıkış seçildi</text>
+</g>
+<!-- Poliklinik -->
+<g id="node6" class="node">
+<title>Poliklinik</title>
+<path fill="none" stroke="black" d="M485.99,-420.13C485.99,-420.13 395.19,-420.13 395.19,-420.13 389.19,-420.13 383.19,-414.13 383.19,-408.13 383.19,-408.13 383.19,-396.13 383.19,-396.13 383.19,-390.13 389.19,-384.13 395.19,-384.13 395.19,-384.13 485.99,-384.13 485.99,-384.13 491.99,-384.13 497.99,-390.13 497.99,-396.13 497.99,-396.13 497.99,-408.13 497.99,-408.13 497.99,-414.13 491.99,-420.13 485.99,-420.13"/>
+<text xml:space="preserve" text-anchor="middle" x="440.59" y="-397.93" font-family="Arial" font-size="14.00">Poliklinik seçimi</text>
+</g>
+<!-- Menu&#45;&gt;Poliklinik -->
+<g id="edge4" class="edge">
+<title>Menu-&gt;Poliklinik</title>
+<path fill="none" stroke="black" d="M501.6,-499.86C498.56,-498.63 495.55,-497.42 492.59,-496.26 470.1,-487.43 455.35,-497.91 441.29,-478.26 431.73,-464.9 431.4,-446.51 433.54,-431.27"/>
+<polygon fill="black" stroke="black" points="436.91,-432.32 435.27,-421.85 430.02,-431.05 436.91,-432.32"/>
+<text xml:space="preserve" text-anchor="middle" x="501.94" y="-465.66" font-family="Times,serif" font-size="14.00">1: Randevu İşlemleri</text>
+</g>
+<!-- TahlilListe -->
+<g id="node13" class="node">
+<title>TahlilListe</title>
+<path fill="none" stroke="black" d="M810.61,-420.13C810.61,-420.13 692.57,-420.13 692.57,-420.13 686.57,-420.13 680.57,-414.13 680.57,-408.13 680.57,-408.13 680.57,-396.13 680.57,-396.13 680.57,-390.13 686.57,-384.13 692.57,-384.13 692.57,-384.13 810.61,-384.13 810.61,-384.13 816.61,-384.13 822.61,-390.13 822.61,-396.13 822.61,-396.13 822.61,-408.13 822.61,-408.13 822.61,-414.13 816.61,-420.13 810.61,-420.13"/>
+<text xml:space="preserve" text-anchor="middle" x="751.59" y="-397.93" font-family="Arial" font-size="14.00">Tahlil listesi kontrolü</text>
+</g>
+<!-- Menu&#45;&gt;TahlilListe -->
+<g id="edge5" class="edge">
+<title>Menu-&gt;TahlilListe</title>
+<path fill="none" stroke="black" d="M640.46,-496.06C649.41,-490.35 658.35,-484.33 666.59,-478.26 687.53,-462.85 709.47,-443.36 725.82,-428.09"/>
+<polygon fill="black" stroke="black" points="727.85,-430.98 732.72,-421.57 723.04,-425.89 727.85,-430.98"/>
+<text xml:space="preserve" text-anchor="middle" x="748.77" y="-465.66" font-family="Times,serif" font-size="14.00">2: Tahlil Görüntüleme</text>
+</g>
+<!-- Doktor -->
+<g id="node7" class="node">
+<title>Doktor</title>
+<path fill="none" stroke="black" d="M479.38,-308C479.38,-308 401.81,-308 401.81,-308 395.81,-308 389.81,-302 389.81,-296 389.81,-296 389.81,-284 389.81,-284 389.81,-278 395.81,-272 401.81,-272 401.81,-272 479.38,-272 479.38,-272 485.38,-272 491.38,-278 491.38,-284 491.38,-284 491.38,-296 491.38,-296 491.38,-302 485.38,-308 479.38,-308"/>
+<text xml:space="preserve" text-anchor="middle" x="440.59" y="-285.8" font-family="Arial" font-size="14.00">Doktor seçimi</text>
+</g>
+<!-- Poliklinik&#45;&gt;Doktor -->
+<g id="edge7" class="edge">
+<title>Poliklinik-&gt;Doktor</title>
+<path fill="none" stroke="black" d="M440.59,-383.92C440.59,-366.81 440.59,-340.24 440.59,-319.89"/>
+<polygon fill="black" stroke="black" points="444.09,-319.96 440.59,-309.96 437.09,-319.96 444.09,-319.96"/>
+</g>
+<!-- Saat -->
+<g id="node8" class="node">
+<title>Saat</title>
+<path fill="none" stroke="black" d="M494.17,-219.2C494.17,-219.2 387.01,-219.2 387.01,-219.2 381.01,-219.2 375.01,-213.2 375.01,-207.2 375.01,-207.2 375.01,-195.2 375.01,-195.2 375.01,-189.2 381.01,-183.2 387.01,-183.2 387.01,-183.2 494.17,-183.2 494.17,-183.2 500.17,-183.2 506.17,-189.2 506.17,-195.2 506.17,-195.2 506.17,-207.2 506.17,-207.2 506.17,-213.2 500.17,-219.2 494.17,-219.2"/>
+<text xml:space="preserve" text-anchor="middle" x="440.59" y="-197" font-family="Arial" font-size="14.00">Uygun saat seçimi</text>
+</g>
+<!-- Doktor&#45;&gt;Saat -->
+<g id="edge8" class="edge">
+<title>Doktor-&gt;Saat</title>
+<path fill="none" stroke="black" d="M440.59,-271.85C440.59,-260.16 440.59,-244.39 440.59,-230.82"/>
+<polygon fill="black" stroke="black" points="444.09,-231.12 440.59,-221.12 437.09,-231.12 444.09,-231.12"/>
+</g>
+<!-- SaatYok -->
+<g id="node9" class="node">
+<title>SaatYok</title>
+<path fill="none" stroke="black" d="M368.47,-130.4C368.47,-130.4 224.71,-130.4 224.71,-130.4 218.71,-130.4 212.71,-124.4 212.71,-118.4 212.71,-118.4 212.71,-106.4 212.71,-106.4 212.71,-100.4 218.71,-94.4 224.71,-94.4 224.71,-94.4 368.47,-94.4 368.47,-94.4 374.47,-94.4 380.47,-100.4 380.47,-106.4 380.47,-106.4 380.47,-118.4 380.47,-118.4 380.47,-124.4 374.47,-130.4 368.47,-130.4"/>
+<text xml:space="preserve" text-anchor="middle" x="296.59" y="-108.2" font-family="Arial" font-size="14.00">Uygun saat bulunamadı</text>
+</g>
+<!-- Saat&#45;&gt;SaatYok -->
+<g id="edge9" class="edge">
+<title>Saat-&gt;SaatYok</title>
+<path fill="none" stroke="black" d="M411.8,-182.84C389.72,-169.54 359.05,-151.05 334.91,-136.49"/>
+<polygon fill="black" stroke="black" points="337,-133.67 326.63,-131.51 333.39,-139.67 337,-133.67"/>
+<text xml:space="preserve" text-anchor="middle" x="393.16" y="-152.6" font-family="Times,serif" font-size="14.00">Boş</text>
+</g>
+<!-- Onay -->
+<g id="node10" class="node">
+<title>Onay</title>
+<path fill="none" stroke="black" d="M536.9,-130.4C536.9,-130.4 410.28,-130.4 410.28,-130.4 404.28,-130.4 398.28,-124.4 398.28,-118.4 398.28,-118.4 398.28,-106.4 398.28,-106.4 398.28,-100.4 404.28,-94.4 410.28,-94.4 410.28,-94.4 536.9,-94.4 536.9,-94.4 542.9,-94.4 548.9,-100.4 548.9,-106.4 548.9,-106.4 548.9,-118.4 548.9,-118.4 548.9,-124.4 542.9,-130.4 536.9,-130.4"/>
+<text xml:space="preserve" text-anchor="middle" x="473.59" y="-108.2" font-family="Arial" font-size="14.00">Randevu onayı (E/H)</text>
+</g>
+<!-- Saat&#45;&gt;Onay -->
+<g id="edge10" class="edge">
+<title>Saat-&gt;Onay</title>
+<path fill="none" stroke="black" d="M447.11,-183.05C451.65,-171.12 457.79,-154.95 463.02,-141.2"/>
+<polygon fill="black" stroke="black" points="466.15,-142.82 466.43,-132.23 459.61,-140.33 466.15,-142.82"/>
+<text xml:space="preserve" text-anchor="middle" x="479.88" y="-152.6" font-family="Times,serif" font-size="14.00">Seçildi</text>
+</g>
+<!-- SaatYok&#45;&gt;Menu -->
+<g id="edge13" class="edge">
+<title>SaatYok-&gt;Menu</title>
+<path fill="none" stroke="black" d="M304.64,-130.6C311.95,-147.82 321.59,-175.27 321.59,-200.2 321.59,-403.13 321.59,-403.13 321.59,-403.13 321.59,-486.2 404.17,-468.5 490.42,-495.81"/>
+<polygon fill="black" stroke="black" points="489.19,-499.09 499.79,-498.99 491.44,-492.46 489.19,-499.09"/>
+</g>
+<!-- Kaydet -->
+<g id="node11" class="node">
+<title>Kaydet</title>
+<path fill="none" stroke="black" d="M332.69,-41.6C332.69,-41.6 218.5,-41.6 218.5,-41.6 212.5,-41.6 206.5,-35.6 206.5,-29.6 206.5,-29.6 206.5,-12 206.5,-12 206.5,-6 212.5,0 218.5,0 218.5,0 332.69,0 332.69,0 338.69,0 344.69,-6 344.69,-12 344.69,-12 344.69,-29.6 344.69,-29.6 344.69,-35.6 338.69,-41.6 332.69,-41.6"/>
+<text xml:space="preserve" text-anchor="middle" x="275.59" y="-25" font-family="Arial" font-size="14.00">Randevu kaydedildi</text>
+<text xml:space="preserve" text-anchor="middle" x="275.59" y="-8.2" font-family="Arial" font-size="14.00">SMS gönderildi</text>
+</g>
+<!-- Onay&#45;&gt;Kaydet -->
+<g id="edge11" class="edge">
+<title>Onay-&gt;Kaydet</title>
+<path fill="none" stroke="black" d="M434.95,-93.91C405.29,-80.49 363.96,-61.79 330.82,-46.79"/>
+<polygon fill="black" stroke="black" points="332.3,-43.62 321.75,-42.69 329.42,-50 332.3,-43.62"/>
+<text xml:space="preserve" text-anchor="middle" x="405.15" y="-63.8" font-family="Times,serif" font-size="14.00">Evet</text>
+</g>
+<!-- Iptal -->
+<g id="node12" class="node">
+<title>Iptal</title>
+<path fill="none" stroke="black" d="M558.69,-38.8C558.69,-38.8 444.5,-38.8 444.5,-38.8 438.5,-38.8 432.5,-32.8 432.5,-26.8 432.5,-26.8 432.5,-14.8 432.5,-14.8 432.5,-8.8 438.5,-2.8 444.5,-2.8 444.5,-2.8 558.69,-2.8 558.69,-2.8 564.69,-2.8 570.69,-8.8 570.69,-14.8 570.69,-14.8 570.69,-26.8 570.69,-26.8 570.69,-32.8 564.69,-38.8 558.69,-38.8"/>
+<text xml:space="preserve" text-anchor="middle" x="501.59" y="-16.6" font-family="Arial" font-size="14.00">Randevu iptal edildi</text>
+</g>
+<!-- Onay&#45;&gt;Iptal -->
+<g id="edge12" class="edge">
+<title>Onay-&gt;Iptal</title>
+<path fill="none" stroke="black" d="M478.99,-94.12C482.9,-81.6 488.28,-64.4 492.81,-49.92"/>
+<polygon fill="black" stroke="black" points="496.12,-51.06 495.76,-40.47 489.43,-48.97 496.12,-51.06"/>
+<text xml:space="preserve" text-anchor="middle" x="506.76" y="-63.8" font-family="Times,serif" font-size="14.00">Hayır</text>
+</g>
+<!-- Kaydet&#45;&gt;Menu -->
+<g id="edge14" class="edge">
+<title>Kaydet-&gt;Menu</title>
+<path fill="none" stroke="black" d="M235.15,-42.03C210.84,-57.33 184.59,-80.91 184.59,-111.4 184.59,-403.13 184.59,-403.13 184.59,-403.13 184.59,-542.65 346.45,-462.64 490.62,-496.15"/>
+<polygon fill="black" stroke="black" points="489.39,-499.45 499.94,-498.51 491.11,-492.66 489.39,-499.45"/>
+</g>
+<!-- Iptal&#45;&gt;Menu -->
+<g id="edge15" class="edge">
+<title>Iptal-&gt;Menu</title>
+<path fill="none" stroke="black" d="M529.09,-39.2C550.5,-55.1 576.59,-80.77 576.59,-111.4 576.59,-403.13 576.59,-403.13 576.59,-403.13 576.59,-430.03 576.59,-460.07 576.59,-484.47"/>
+<polygon fill="black" stroke="black" points="573.09,-484.44 576.59,-494.44 580.09,-484.44 573.09,-484.44"/>
+</g>
+<!-- TahlilYok -->
+<g id="node14" class="node">
+<title>TahlilYok</title>
+<path fill="none" stroke="black" d="M752.11,-308C752.11,-308 655.07,-308 655.07,-308 649.07,-308 643.07,-302 643.07,-296 643.07,-296 643.07,-284 643.07,-284 643.07,-278 649.07,-272 655.07,-272 655.07,-272 752.11,-272 752.11,-272 758.11,-272 764.11,-278 764.11,-284 764.11,-284 764.11,-296 764.11,-296 764.11,-302 758.11,-308 752.11,-308"/>
+<text xml:space="preserve" text-anchor="middle" x="703.59" y="-285.8" font-family="Arial" font-size="14.00">Kayıtlı tahlil yok</text>
+</g>
+<!-- TahlilListe&#45;&gt;TahlilYok -->
+<g id="edge16" class="edge">
+<title>TahlilListe-&gt;TahlilYok</title>
+<path fill="none" stroke="black" d="M744.09,-383.92C736.49,-366.49 724.62,-339.24 715.69,-318.75"/>
+<polygon fill="black" stroke="black" points="719.01,-317.61 711.8,-309.84 712.59,-320.4 719.01,-317.61"/>
+<text xml:space="preserve" text-anchor="middle" x="737.82" y="-330.2" font-family="Times,serif" font-size="14.00">Boş</text>
+</g>
+<!-- SonucHazir -->
+<g id="node15" class="node">
+<title>SonucHazir</title>
+<path fill="none" stroke="black" d="M938.85,-308C938.85,-308 794.34,-308 794.34,-308 788.34,-308 782.34,-302 782.34,-296 782.34,-296 782.34,-284 782.34,-284 782.34,-278 788.34,-272 794.34,-272 794.34,-272 938.85,-272 938.85,-272 944.85,-272 950.85,-278 950.85,-284 950.85,-284 950.85,-296 950.85,-296 950.85,-302 944.85,-308 938.85,-308"/>
+<text xml:space="preserve" text-anchor="middle" x="866.59" y="-285.8" font-family="Arial" font-size="14.00">Tahlil sonucu hazır mı?</text>
+</g>
+<!-- TahlilListe&#45;&gt;SonucHazir -->
+<g id="edge17" class="edge">
+<title>TahlilListe-&gt;SonucHazir</title>
+<path fill="none" stroke="black" d="M769.81,-383.68C788.82,-365.47 818.81,-336.76 840.36,-316.12"/>
+<polygon fill="black" stroke="black" points="842.56,-318.86 847.36,-309.42 837.72,-313.8 842.56,-318.86"/>
+<text xml:space="preserve" text-anchor="middle" x="839.89" y="-330.2" font-family="Times,serif" font-size="14.00">Var</text>
+</g>
+<!-- TahlilYok&#45;&gt;Menu -->
+<g id="edge18" class="edge">
+<title>TahlilYok-&gt;Menu</title>
+<path fill="none" stroke="black" d="M695.18,-308.33C688.49,-322.35 679.05,-342.68 671.59,-360.8 650.44,-412.21 657.93,-431.04 628.59,-478.26 626.69,-481.32 624.6,-484.35 622.38,-487.32"/>
+<polygon fill="black" stroke="black" points="619.86,-484.87 616.34,-494.86 625.32,-489.24 619.86,-484.87"/>
+</g>
+<!-- SonucGoster -->
+<g id="node16" class="node">
+<title>SonucGoster</title>
+<path fill="none" stroke="black" d="M787.68,-219.2C787.68,-219.2 673.51,-219.2 673.51,-219.2 667.51,-219.2 661.51,-213.2 661.51,-207.2 661.51,-207.2 661.51,-195.2 661.51,-195.2 661.51,-189.2 667.51,-183.2 673.51,-183.2 673.51,-183.2 787.68,-183.2 787.68,-183.2 793.68,-183.2 799.68,-189.2 799.68,-195.2 799.68,-195.2 799.68,-207.2 799.68,-207.2 799.68,-213.2 793.68,-219.2 787.68,-219.2"/>
+<text xml:space="preserve" text-anchor="middle" x="730.59" y="-197" font-family="Arial" font-size="14.00">Sonuç görüntüleme</text>
+</g>
+<!-- SonucHazir&#45;&gt;SonucGoster -->
+<g id="edge20" class="edge">
+<title>SonucHazir-&gt;SonucGoster</title>
+<path fill="none" stroke="black" d="M839.4,-271.64C818.73,-258.46 790.1,-240.18 767.39,-225.68"/>
+<polygon fill="black" stroke="black" points="769.33,-222.77 759.02,-220.34 765.56,-228.67 769.33,-222.77"/>
+<text xml:space="preserve" text-anchor="middle" x="823.6" y="-241.4" font-family="Times,serif" font-size="14.00">Evet</text>
+</g>
+<!-- Bekle -->
+<g id="node17" class="node">
+<title>Bekle</title>
+<path fill="none" stroke="black" d="M977.03,-219.2C977.03,-219.2 830.16,-219.2 830.16,-219.2 824.16,-219.2 818.16,-213.2 818.16,-207.2 818.16,-207.2 818.16,-195.2 818.16,-195.2 818.16,-189.2 824.16,-183.2 830.16,-183.2 830.16,-183.2 977.03,-183.2 977.03,-183.2 983.03,-183.2 989.03,-189.2 989.03,-195.2 989.03,-195.2 989.03,-207.2 989.03,-207.2 989.03,-213.2 983.03,-219.2 977.03,-219.2"/>
+<text xml:space="preserve" text-anchor="middle" x="903.59" y="-197" font-family="Arial" font-size="14.00">Sonuç henüz hazır değil</text>
+</g>
+<!-- SonucHazir&#45;&gt;Bekle -->
+<g id="edge19" class="edge">
+<title>SonucHazir-&gt;Bekle</title>
+<path fill="none" stroke="black" d="M873.9,-271.85C878.99,-259.92 885.88,-243.75 891.74,-230"/>
+<polygon fill="black" stroke="black" points="894.88,-231.57 895.58,-221 888.44,-228.83 894.88,-231.57"/>
+<text xml:space="preserve" text-anchor="middle" x="905.9" y="-241.4" font-family="Times,serif" font-size="14.00">Hayır</text>
+</g>
+<!-- PDFsec -->
+<g id="node18" class="node">
+<title>PDFsec</title>
+<path fill="none" stroke="black" d="M799.32,-130.4C799.32,-130.4 661.86,-130.4 661.86,-130.4 655.86,-130.4 649.86,-124.4 649.86,-118.4 649.86,-118.4 649.86,-106.4 649.86,-106.4 649.86,-100.4 655.86,-94.4 661.86,-94.4 661.86,-94.4 799.32,-94.4 799.32,-94.4 805.32,-94.4 811.32,-100.4 811.32,-106.4 811.32,-106.4 811.32,-118.4 811.32,-118.4 811.32,-124.4 805.32,-130.4 799.32,-130.4"/>
+<text xml:space="preserve" text-anchor="middle" x="730.59" y="-108.2" font-family="Arial" font-size="14.00">PDF indirilsin mi? (E/H)</text>
+</g>
+<!-- SonucGoster&#45;&gt;PDFsec -->
+<g id="edge21" class="edge">
+<title>SonucGoster-&gt;PDFsec</title>
+<path fill="none" stroke="black" d="M730.59,-183.05C730.59,-171.36 730.59,-155.59 730.59,-142.02"/>
+<polygon fill="black" stroke="black" points="734.09,-142.32 730.59,-132.32 727.09,-142.32 734.09,-142.32"/>
+</g>
+<!-- Bekle&#45;&gt;Menu -->
+<g id="edge26" class="edge">
+<title>Bekle-&gt;Menu</title>
+<path fill="none" stroke="black" d="M923.22,-219.57C936.31,-232.53 952.38,-251.48 959.59,-272 964.9,-287.09 965.09,-292.98 959.59,-308 925.51,-401.06 900.25,-426.74 815.59,-478.26 769.65,-506.22 710.82,-519.88 663.03,-526.54"/>
+<polygon fill="black" stroke="black" points="662.73,-523.05 653.26,-527.82 663.63,-530 662.73,-523.05"/>
+</g>
+<!-- PDFindir -->
+<g id="node19" class="node">
+<title>PDFindir</title>
+<path fill="none" stroke="black" d="M672.32,-38.8C672.32,-38.8 604.86,-38.8 604.86,-38.8 598.86,-38.8 592.86,-32.8 592.86,-26.8 592.86,-26.8 592.86,-14.8 592.86,-14.8 592.86,-8.8 598.86,-2.8 604.86,-2.8 604.86,-2.8 672.32,-2.8 672.32,-2.8 678.32,-2.8 684.32,-8.8 684.32,-14.8 684.32,-14.8 684.32,-26.8 684.32,-26.8 684.32,-32.8 678.32,-38.8 672.32,-38.8"/>
+<text xml:space="preserve" text-anchor="middle" x="638.59" y="-16.6" font-family="Arial" font-size="14.00">PDF indirildi</text>
+</g>
+<!-- PDFsec&#45;&gt;PDFindir -->
+<g id="edge22" class="edge">
+<title>PDFsec-&gt;PDFindir</title>
+<path fill="none" stroke="black" d="M712.85,-94.12C699.11,-80.74 679.87,-62 664.41,-46.95"/>
+<polygon fill="black" stroke="black" points="666.97,-44.55 657.36,-40.08 662.08,-49.56 666.97,-44.55"/>
+<text xml:space="preserve" text-anchor="middle" x="705.66" y="-63.8" font-family="Times,serif" font-size="14.00">Evet</text>
+</g>
+<!-- PDFiptal -->
+<g id="node20" class="node">
+<title>PDFiptal</title>
+<path fill="none" stroke="black" d="M1013.56,-38.8C1013.56,-38.8 877.62,-38.8 877.62,-38.8 871.62,-38.8 865.62,-32.8 865.62,-26.8 865.62,-26.8 865.62,-14.8 865.62,-14.8 865.62,-8.8 871.62,-2.8 877.62,-2.8 877.62,-2.8 1013.56,-2.8 1013.56,-2.8 1019.56,-2.8 1025.56,-8.8 1025.56,-14.8 1025.56,-14.8 1025.56,-26.8 1025.56,-26.8 1025.56,-32.8 1019.56,-38.8 1013.56,-38.8"/>
+<text xml:space="preserve" text-anchor="middle" x="945.59" y="-16.6" font-family="Arial" font-size="14.00">PDF indirme iptal edildi</text>
+</g>
+<!-- PDFsec&#45;&gt;PDFiptal -->
+<g id="edge23" class="edge">
+<title>PDFsec-&gt;PDFiptal</title>
+<path fill="none" stroke="black" d="M772.56,-93.91C807.04,-79.54 856.06,-59.11 893.13,-43.66"/>
+<polygon fill="black" stroke="black" points="894.45,-46.9 902.34,-39.83 891.76,-40.44 894.45,-46.9"/>
+<text xml:space="preserve" text-anchor="middle" x="868.46" y="-63.8" font-family="Times,serif" font-size="14.00">Hayır</text>
+</g>
+<!-- PDFindir&#45;&gt;Menu -->
+<g id="edge24" class="edge">
+<title>PDFindir-&gt;Menu</title>
+<path fill="none" stroke="black" d="M631,-39.28C623.97,-57.08 614.59,-85.63 614.59,-111.4 614.59,-403.13 614.59,-403.13 614.59,-403.13 614.59,-431.11 606.35,-461.17 597.54,-485.3"/>
+<polygon fill="black" stroke="black" points="594.31,-483.94 594.02,-494.53 600.85,-486.43 594.31,-483.94"/>
+</g>
+<!-- PDFiptal&#45;&gt;Menu -->
+<g id="edge25" class="edge">
+<title>PDFiptal-&gt;Menu</title>
+<path fill="none" stroke="black" d="M971.22,-39.21C991.56,-55.3 1016.59,-81.23 1016.59,-111.4 1016.59,-403.13 1016.59,-403.13 1016.59,-403.13 1016.59,-476.09 791.21,-511.06 663.06,-525.05"/>
+<polygon fill="black" stroke="black" points="662.81,-521.56 653.24,-526.1 663.55,-528.52 662.81,-521.56"/>
+</g>
+</g>
+</svg>
