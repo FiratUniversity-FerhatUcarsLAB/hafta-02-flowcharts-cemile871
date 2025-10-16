@@ -1,0 +1,69 @@
+digraph HastaneSistemi {
+
+    rankdir=TB;
+    node [shape=rectangle, style=rounded, fontname="Arial"];
+
+    Start [label="BAŞLA", shape=circle, style=filled, fillcolor=lightgrey];
+    Auth [label="Kimlik doğrulama:\nTCKimlikNo, Şifre kontrolü"];
+    AuthFail [label="Kimlik doğrulama başarısız\nSistem sonlanır", shape=rectangle, fillcolor="#ffdddd", style="filled,rounded"];
+    Menu [label="ANA MENÜ:\n1. Randevu İşlemleri\n2. Tahlil Görüntüleme\n3. Çıkış"];
+
+    Exit [label="Çıkış", shape=doublecircle, fillcolor="#ddddff", style="filled,rounded"];
+
+    // --- Randevu Modülü ---
+    Poliklinik [label="Poliklinik seçimi"];
+    Doktor [label="Doktor seçimi"];
+    Saat [label="Uygun saat seçimi"];
+    SaatYok [label="Uygun saat bulunamadı"];
+    Onay [label="Randevu onayı (E/H)"];
+    Kaydet [label="Randevu kaydedildi\nSMS gönderildi"];
+    Iptal [label="Randevu iptal edildi"];
+
+    // --- Tahlil Modülü ---
+    TahlilListe [label="Tahlil listesi kontrolü"];
+    TahlilYok [label="Kayıtlı tahlil yok"];
+    SonucHazir [label="Tahlil sonucu hazır mı?"];
+    SonucGoster [label="Sonuç görüntüleme"];
+    Bekle [label="Sonuç henüz hazır değil"];
+    PDFsec [label="PDF indirilsin mi? (E/H)"];
+    PDFindir [label="PDF indirildi"];
+    PDFiptal [label="PDF indirme iptal edildi"];
+
+    // --- Akışlar ---
+    Start -> Auth;
+    Auth -> AuthFail [label="Hatalı"];
+    Auth -> Menu [label="Doğru"];
+
+    // Menüden seçimler
+    Menu -> Poliklinik [label="1: Randevu İşlemleri"];
+    Menu -> TahlilListe [label="2: Tahlil Görüntüleme"];
+    Menu -> Exit [label="3: Çıkış"];
+
+    // --- Randevu akışı ---
+    Poliklinik -> Doktor;
+    Doktor -> Saat;
+    Saat -> SaatYok [label="Boş"];
+    Saat -> Onay [label="Seçildi"];
+    Onay -> Kaydet [label="Evet"];
+    Onay -> Iptal [label="Hayır"];
+    SaatYok -> Menu;
+    Kaydet -> Menu;
+    Iptal -> Menu;
+
+    // --- Tahlil akışı ---
+    TahlilListe -> TahlilYok [label="Boş"];
+    TahlilListe -> SonucHazir [label="Var"];
+    TahlilYok -> Menu;
+    SonucHazir -> Bekle [label="Hayır"];
+    SonucHazir -> SonucGoster [label="Evet"];
+    SonucGoster -> PDFsec;
+    PDFsec -> PDFindir [label="Evet"];
+    PDFsec -> PDFiptal [label="Hayır"];
+    PDFindir -> Menu;
+    PDFiptal -> Menu;
+    Bekle -> Menu;
+
+    // --- Genel akış ---
+    Menu -> Exit [label="3: Çıkış seçildi"];
+
+}
